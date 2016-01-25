@@ -206,579 +206,579 @@ type dual
     dual() = error("dual is not implemented")
 end
 
-function Plot(gr::mglGraph, dat::Array, pen::ASCIIString, opt::ASCIIString)
+function plot(gr::mglGraph, dat::Array, pen::ASCIIString, opt::ASCIIString)
     ccall((:mgl_plot, "libmgl2"), Void, (Ptr{Void}, Ptr{Void}, Ptr{UInt8}, Ptr{UInt8}), gr, dat.data, pen, opt)
 end
 
 mglNaN = NaN
-function Stop(gr::mglGraph, stop::Bool=true)
+function stop(gr::mglGraph, stop::Bool=true)
 
     	ccall((:mgl_ask_stop,"libmgl2"), Void, (Ptr{Void},Bool), gr, stop)
 end
 
-#function SetEventFunc(gr::mglGraph, void (*func)(void *), void *par=NULL)
+#function setEventFunc(gr::mglGraph, void (*func)(void *), void *par=NULL)
 
 #    	ccall((:mgl_set_event_func,"libmgl2"), Void, (Ptr{Void},void,void), gr, func, par)
 #end
 
-function Alpha(gr::mglGraph, enable::Bool)
+function alpha(gr::mglGraph, enable::Bool)
 
     	ccall((:mgl_set_alpha,"libmgl2"), Void, (Ptr{Void},Bool), gr, enable)
 end
 
-function SetAlphaDef(gr::mglGraph, alpha::Number)
+function setAlphaDef(gr::mglGraph, alpha::Number)
 
     	ccall((:mgl_set_alpha_default,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, alpha)
 end
 
-function SetTranspType(gr::mglGraph, transpType::Cint)
+function setTranspType(gr::mglGraph, transpType::Cint)
 
     	ccall((:mgl_set_transp_type,"libmgl2"), Void, (Ptr{Void},Cint), gr, transpType)
 end
 
-function Light(gr::mglGraph, enable::Bool)
+function light(gr::mglGraph, enable::Bool)
 
     	ccall((:mgl_set_light,"libmgl2"), Void, (Ptr{Void},Bool), gr, enable)
 end
 
-function Light(gr::mglGraph, n::Cint, enable::Bool)
+function light(gr::mglGraph, n::Cint, enable::Bool)
 
     	ccall((:mgl_set_light_n,"libmgl2"), Void, (Ptr{Void},Cint,Bool), gr, n, enable)
 end
 
-function SetDifLight(gr::mglGraph, dif::Bool)
+function setDifLight(gr::mglGraph, dif::Bool)
 
     	ccall((:mgl_set_light_dif,"libmgl2"), Void, (Ptr{Void},Bool), gr, dif)
 end
 
-function AttachLight(gr::mglGraph, enable::Bool)
+function attachLight(gr::mglGraph, enable::Bool)
 
     	ccall((:mgl_set_attach_light,"libmgl2"), Void, (Ptr{Void},Bool), gr, enable)
 end
 
-function AddLight(gr::mglGraph, n::Cint, p::mglPoint, col::Char='w', bright::Number=0.5, ap::Number=0.0)
+function addLight(gr::mglGraph, n::Cint, p::mglPoint, col::Char='w', bright::Number=0.5, ap::Number=0.0)
 
     	ccall((:mgl_add_light_ext,"libmgl2"), Void, (Ptr{Void},Cint,mreal,mreal,mreal,Cchar,Cdouble,Cdouble), gr, n, p.x, p.y, p.z, col, bright, ap)
 end
 
-function AddLight(gr::mglGraph, n::Cint, r::mglPoint, p::mglPoint, col::Char='w', bright::Number=0.5, ap::Number=0.0)
+function addLight(gr::mglGraph, n::Cint, r::mglPoint, p::mglPoint, col::Char='w', bright::Number=0.5, ap::Number=0.0)
 
     	ccall((:mgl_add_light_loc,"libmgl2"), Void, (Ptr{Void},Cint,mreal,mreal,mreal,mreal,mreal,mreal,Cchar,Cdouble,Cdouble), gr, n, r.x, r.y, r.z, p.x, p.y, p.z, col, bright, ap)
 end
 
-function SetAmbient(gr::mglGraph, i::Number)
+function setAmbient(gr::mglGraph, i::Number)
 
     	ccall((:mgl_set_ambbr,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, i)
 end
 
-function SetDiffuse(gr::mglGraph, i::Number)
+function setDiffuse(gr::mglGraph, i::Number)
 
     	ccall((:mgl_set_difbr,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, i)
 end
 
-function Fog(gr::mglGraph, d::Number, dz::Number=0.25)
+function fog(gr::mglGraph, d::Number, dz::Number=0.25)
 
     	ccall((:mgl_set_fog,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble), gr, d, dz)
 end
 
-function SetBarWidth(gr::mglGraph, width::Number)
+function setBarWidth(gr::mglGraph, width::Number)
 
     	ccall((:mgl_set_bar_width,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, width)
 end
 
-function SetMarkSize(gr::mglGraph, size::Number)
+function setMarkSize(gr::mglGraph, size::Number)
 
     	ccall((:mgl_set_mark_size,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, size)
 end
 
-function SetArrowSize(gr::mglGraph, size::Number)
+function setArrowSize(gr::mglGraph, size::Number)
 
     	ccall((:mgl_set_arrow_size,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, size)
 end
 
-function SetMeshNum(gr::mglGraph, num::Cint)
+function setMeshNum(gr::mglGraph, num::Cint)
 
     	ccall((:mgl_set_meshnum,"libmgl2"), Void, (Ptr{Void},Cint), gr, num)
 end
 
-function SetFaceNum(gr::mglGraph, num::Cint)
+function setFaceNum(gr::mglGraph, num::Cint)
 
     	ccall((:mgl_set_facenum,"libmgl2"), Void, (Ptr{Void},Cint), gr, num)
 end
 
-function SetCut(gr::mglGraph, cut::Bool)
+function setCut(gr::mglGraph, cut::Bool)
 
     	ccall((:mgl_set_cut,"libmgl2"), Void, (Ptr{Void},Bool), gr, cut)
 end
 
-function SetCutBox(gr::mglGraph, p1::mglPoint, p2::mglPoint)
+function setCutBox(gr::mglGraph, p1::mglPoint, p2::mglPoint)
 
     	ccall((:mgl_set_cut_box,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z)
 end
 
-function CutOff(gr::mglGraph,EqC::ASCIIString)
+function cutOff(gr::mglGraph,EqC::ASCIIString)
 
     	ccall((:mgl_set_cutoff,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$EqC\0".data))
 end
 
-function SetFontSize(gr::mglGraph, size::Number)
+function setFontSize(gr::mglGraph, size::Number)
 
     	ccall((:mgl_set_font_size,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, size)
 end
 
-function SetFontDef(gr::mglGraph,fnt::ASCIIString)
+function setFontDef(gr::mglGraph,fnt::ASCIIString)
 
     	ccall((:mgl_set_font_def,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$fnt\0".data))
 end
 
-function LoadFont(gr::mglGraph,name::ASCIIString,path::ASCIIString=NULL)
+function loadFont(gr::mglGraph,name::ASCIIString,path::ASCIIString=NULL)
 
     	ccall((:mgl_load_font,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$name\0".data),pointer("$path\0".data))
 end
 
-function CopyFont(gr::mglGraph, GR::mglGraph)
+function copyFont(gr::mglGraph, GR::mglGraph)
 
     	ccall((:mgl_copy_font,"libmgl2"), Void, (Ptr{Void},Ptr{Void}), gr, GR.gr)
 end
 
-function SetRotatedText(gr::mglGraph, rotated::Bool)
+function setRotatedText(gr::mglGraph, rotated::Bool)
 
     	ccall((:mgl_set_rotated_text,"libmgl2"), Void, (Ptr{Void},Bool), gr, rotated)
 end
 
-function SetPalette(gr::mglGraph,colors::ASCIIString)
+function setPalette(gr::mglGraph,colors::ASCIIString)
 
     	ccall((:mgl_set_palette,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$colors\0".data))
 end
 
-function SetDefScheme(gr::mglGraph,sch::ASCIIString)
+function setDefScheme(gr::mglGraph,sch::ASCIIString)
 
     	ccall((:mgl_set_def_sch,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$sch\0".data))
 end
 
-function SetMaskAngle(gr::mglGraph, angle::Cint)
+function setMaskAngle(gr::mglGraph, angle::Cint)
 
     	ccall((:mgl_set_mask_angle,"libmgl2"), Void, (Ptr{Void},Cint), gr, angle)
 end
 
-function ZoomAxis(gr::mglGraph, p1::mglPoint=mglPoint(0,0,0,0), p2::mglPoint=mglPoint(1,1,1,1))
+function zoomAxis(gr::mglGraph, p1::mglPoint=mglPoint(0,0,0,0), p2::mglPoint=mglPoint(1,1,1,1))
 
     	ccall((:mgl_zoom_axis,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal), gr, p1.x,p1.y,p1.z,p1.c, p2.x,p2.y,p2.z,p2.c)
 end
 
-function AddRange(gr::mglGraph, dir::Char, v1::Number, v2::Number)
+function addRange(gr::mglGraph, dir::Char, v1::Number, v2::Number)
 
     	ccall((:mgl_add_range_val,"libmgl2"), Void, (Ptr{Void},Cchar,Cdouble,Cdouble), gr, dir, v1, v2)
 end
 
-function SetRange(gr::mglGraph, dir::Char, v1::Number, v2::Number)
+function setRange(gr::mglGraph, dir::Char, v1::Number, v2::Number)
 
     	ccall((:mgl_set_range_val,"libmgl2"), Void, (Ptr{Void},Cchar,Cdouble,Cdouble), gr, dir, v1, v2)
 end
 
-function SetRange(gr::mglGraph, dir::Char, dat::Array, add::Bool=false)
+function setRange(gr::mglGraph, dir::Char, dat::Array, add::Bool=false)
   datDat = mglData(dat)
 
      	ccall((:mgl_set_range_val,"libmgl2"), Void, (Ptr{Void},Cchar,Ptr{Void},Cint), gr, dir,  datDat.data, add)
 end
 
-function SetRanges(gr::mglGraph, x1::Number, x2::Number, y1::Number, y2::Number, z1::Number=0.0, z2::Number=0.0)
+function setRanges(gr::mglGraph, x1::Number, x2::Number, y1::Number, y2::Number, z1::Number=0.0, z2::Number=0.0)
 
     	ccall((:mgl_set_ranges,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble,Cdouble,Cdouble,Cdouble), gr, x1, x2, y1, y2, z1, z2)
 end
 
-function SetRanges(gr::mglGraph, p1::mglPoint, p2::mglPoint)
+function setRanges(gr::mglGraph, p1::mglPoint, p2::mglPoint)
 
     	ccall((:mgl_set_range_dat,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal), gr,'x',xx,0);	mgl_set_range_dat(gr.graph,'y',yy,0)
 end
 
-function SetAutoRanges(gr::mglGraph, x1::Number, x2::Number, y1::Number=0.0, y2::Number=0.0, z1::Number=0.0, z2::Number=0.0, c1::Number=0.0, c2::Number=0.0)
+function setAutoRanges(gr::mglGraph, x1::Number, x2::Number, y1::Number=0.0, y2::Number=0.0, z1::Number=0.0, z2::Number=0.0, c1::Number=0.0, c2::Number=0.0)
 
     	ccall((:mgl_set_auto_ranges,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble,Cdouble,Cdouble,Cdouble,Cdouble,Cdouble), gr, x1, x2, y1, y2, z1, z2, c1, c2)
 end
 
-function SetAutoRanges(gr::mglGraph, p1::mglPoint, p2::mglPoint)
+function setAutoRanges(gr::mglGraph, p1::mglPoint, p2::mglPoint)
 
     	ccall((:mgl_set_auto_ranges,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal), gr, p1.x, p2.x, p1.y, p2.y, p1.z, p2.z, p1.c, p2.c)
 end
 
-function SetOrigin(gr::mglGraph, p::mglPoint)
+function setOrigin(gr::mglGraph, p::mglPoint)
 
     	ccall((:mgl_set_origin,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal), gr, p.x, p.y, p.z)
 end
 
-function SetOrigin(gr::mglGraph, x0::Number, y0::Number, z0::Number=mglNaN)
+function setOrigin(gr::mglGraph, x0::Number, y0::Number, z0::Number=mglNaN)
 
     	ccall((:mgl_set_origin,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, x0, y0, z0)
 end
 
-function SetFunc(gr::mglGraph,EqX::ASCIIString,EqY::ASCIIString,EqZ::ASCIIString=NULL,EqA::ASCIIString=NULL)
+function setFunc(gr::mglGraph,EqX::ASCIIString,EqY::ASCIIString,EqZ::ASCIIString=NULL,EqA::ASCIIString=NULL)
 
     	ccall((:mgl_set_func,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$EqX\0".data),pointer("$EqY\0".data),pointer("$EqZ\0".data),pointer("$EqA\0".data))
 end
 
-function SetCoor(gr::mglGraph, how::Cint)
+function setCoor(gr::mglGraph, how::Cint)
 
     	ccall((:mgl_set_coor,"libmgl2"), Void, (Ptr{Void},Cint), gr, how)
 end
 
-function Ternary(gr::mglGraph, val::Cint)
+function ternary(gr::mglGraph, val::Cint)
 
     	ccall((:mgl_set_ternary,"libmgl2"), Void, (Ptr{Void},Cint), gr, val)
 end
 
-function SetTickLen(gr::mglGraph, len::Number, stt::Number=1.0)
+function setTickLen(gr::mglGraph, len::Number, stt::Number=1.0)
 
     	ccall((:mgl_set_tick_len,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble), gr, len, stt)
 end
 
-function SetAxisStl(gr::mglGraph,stl::ASCIIString="k",tck::ASCIIString=0,sub::ASCIIString=0)
+function setAxisStl(gr::mglGraph,stl::ASCIIString="k",tck::ASCIIString=0,sub::ASCIIString=0)
 
     	ccall((:mgl_set_axis_stl,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$stl\0".data),pointer("$tck\0".data),pointer("$sub\0".data))
 end
 
-function SetTicks(gr::mglGraph, dir::Char, d::Number=0.0, ns::Cint=0, org::Number=mglNaN,factor::ASCIIString="")
+function setTicks(gr::mglGraph, dir::Char, d::Number=0.0, ns::Cint=0, org::Number=mglNaN,factor::ASCIIString="")
 
     	ccall((:mgl_set_ticks_fact,"libmgl2"), Void, (Ptr{Void},Cchar,Cdouble,Cint,Cdouble,Ptr{Cchar}), gr, dir, d, ns, org,pointer("$factor\0".data))
 end
 
-function SetTicks(gr::mglGraph, dir::Char, d::Number, ns::Cint, org::Number, factor::UTF8String)
+function setTicks(gr::mglGraph, dir::Char, d::Number, ns::Cint, org::Number, factor::UTF8String)
 
     	ccall((:mgl_set_ticks_fact,"libmgl2"), Void, (Ptr{Void},Cchar,Cdouble,Cint,Cdouble,Ptr{Cwchar_t}), gr, dir, d, ns, org, pointer("$factor\0".data))
 end
 
-function Adjust(gr::mglGraph,dir::ASCIIString="xyzc")
+function adjust(gr::mglGraph,dir::ASCIIString="xyzc")
 
     	ccall((:mgl_adjust_ticks,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$dir\0".data))
 end
 
-function SetTuneTicks(gr::mglGraph, tune::Cint, fact_pos::Number=1.15)
+function setTuneTicks(gr::mglGraph, tune::Cint, fact_pos::Number=1.15)
 
     	ccall((:mgl_tune_ticks,"libmgl2"), Void, (Ptr{Void},Cint,Cdouble), gr, tune, fact_pos)
 end
 
-function SubPlot(gr::mglGraph, nx::Cint, ny::Cint,m::Cint,style::ASCIIString="<>_^", dx::Number=0.0, dy::Number=0.0)
+function subPlot(gr::mglGraph, nx::Cint, ny::Cint,m::Cint,style::ASCIIString="<>_^", dx::Number=0.0, dy::Number=0.0)
 
     	ccall((:mgl_subplot_d,"libmgl2"), Void, (Ptr{Void},Cint,Cint,Cint,Ptr{Cchar},Cdouble,Cdouble), gr, nx, ny, m, style, dx, dy)
 end
 
-function MultiPlot(gr::mglGraph, nx::Cint, ny::Cint,m::Cint, dx::Cint, dy::Cint,style::ASCIIString="<>_^")
+function multiPlot(gr::mglGraph, nx::Cint, ny::Cint,m::Cint, dx::Cint, dy::Cint,style::ASCIIString="<>_^")
 
     	ccall((:mgl_multiplot,"libmgl2"), Void, (Ptr{Void},Cint,Cint,Cint,Cint,Cint,Ptr{Cchar}), gr, nx, ny, m, dx, dy,pointer("$style\0".data))
 end
 
-function Aspect(gr::mglGraph, Ax::Number, Ay::Number,Az::Number=1.0)
+function aspect(gr::mglGraph, Ax::Number, Ay::Number,Az::Number=1.0)
 
     	ccall((:mgl_aspect,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, Ax, Ay, Az)
 end
 
-function Rotate(gr::mglGraph, TetX::Number, TetZ::Number=0.0,TetY::Number=0.0)
+function rotate(gr::mglGraph, TetX::Number, TetZ::Number=0.0,TetY::Number=0.0)
 
     	ccall((:mgl_rotate,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, TetX, TetZ, TetY)
 end
 
-function RotateN(gr::mglGraph, Tet::Number, x::Number,y::Number,z::Number)
+function rotateN(gr::mglGraph, Tet::Number, x::Number,y::Number,z::Number)
 
     	ccall((:mgl_rotate_vector,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble,Cdouble), gr, Tet, x, y, z)
 end
 
-function Perspective(gr::mglGraph, val::Number)
+function perspective(gr::mglGraph, val::Number)
 
     	ccall((:mgl_perspective,"libmgl2"), Void, (Ptr{Void},Cdouble), gr, val)
 end
 
-function View(gr::mglGraph, TetX::Number, TetZ::Number=0.0,TetY::Number=0.0)
+function view(gr::mglGraph, TetX::Number, TetZ::Number=0.0,TetY::Number=0.0)
 
     	ccall((:mgl_view,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, TetX, TetZ, TetY)
 end
 
-function ViewAsRotate(gr::mglGraph, TetZ::Number, TetX::Number,TetY::Number=0.0)
+function viewAsRotate(gr::mglGraph, TetZ::Number, TetX::Number,TetY::Number=0.0)
 
     	ccall((:mgl_view,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, -TetX, -TetZ, -TetY)
 end
 
-function Zoom(gr::mglGraph, x1::Number, y1::Number, x2::Number, y2::Number)
+function zoom(gr::mglGraph, x1::Number, y1::Number, x2::Number, y2::Number)
 
     error("Zoom is not implemented")
 #    	/// Zoom in/out a part of ccall((:picture,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble,Cdouble), use Zoom(0, 0, 1, 1) for restore default)
 end
 
-function SetSize(gr::mglGraph, width::Cint, height::Cint)
+function setSize(gr::mglGraph, width::Cint, height::Cint)
 
     	ccall((:mgl_set_size,"libmgl2"), Void, (Ptr{Void},Cint,Cint), gr, width, height)
 end
 
-function SetQuality(gr::mglGraph, qual::Cint=MGL_DRAW_NORM)
+function setQuality(gr::mglGraph, qual::Cint=MGL_DRAW_NORM)
 
     	ccall((:mgl_set_quality,"libmgl2"), Void, (Ptr{Void},Cint), gr, qual)
 end
 
-function StartGroup(gr::mglGraph,name::ASCIIString)
+function startGroup(gr::mglGraph,name::ASCIIString)
 
     	ccall((:mgl_start_group,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$name\0".data))
 end
 
-function Highlight(gr::mglGraph, id::Cint)
+function highlight(gr::mglGraph, id::Cint)
 
     	ccall((:mgl_highlight,"libmgl2"), Void, (Ptr{Void},Cint), gr, id)
 end
 
-function ShowImage(gr::mglGraph,viewer::ASCIIString, keep::Bool=false)
+function showImage(gr::mglGraph,viewer::ASCIIString, keep::Bool=false)
 
     	ccall((:mgl_show_image,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Bool), gr,pointer("$viewer\0".data), keep)
 end
 
-function WriteFrame(gr::mglGraph,fname::ASCIIString=0,descr::ASCIIString="")
+function writeFrame(gr::mglGraph,fname::ASCIIString=0,descr::ASCIIString="")
 
     	ccall((:mgl_write_frame,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteJPEG(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeJPEG(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_jpg,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteBMP(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeBMP(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_bmp,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteTGA(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeTGA(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_tga,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteEPS(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeEPS(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_eps,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteTEX(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeTEX(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_tex,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteBPS(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeBPS(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_bps,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteSVG(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeSVG(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_svg,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteGIF(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeGIF(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_gif,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteOBJ(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",use_png::Bool=true)
+function writeOBJ(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",use_png::Bool=true)
 
     	ccall((:mgl_write_obj,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Bool), gr,pointer("$fname\0".data),pointer("$descr\0".data), use_png)
 end
 
-function WriteOBJold(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",use_png::Bool=true)
+function writeOBJold(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",use_png::Bool=true)
 
     	ccall((:mgl_write_obj_old,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Bool), gr,pointer("$fname\0".data),pointer("$descr\0".data), use_png)
 end
 
-function WriteXYZ(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeXYZ(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteSTL(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function writeSTL(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_write_stl,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function WriteOFF(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="", colored::Bool=false)
+function writeOFF(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="", colored::Bool=false)
 
     	ccall((:mgl_write_off,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Bool), gr,pointer("$fname\0".data),pointer("$descr\0".data),colored)
 end
 
-function WritePRC(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",make_pdf::Bool=true)
+function writePRC(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="",make_pdf::Bool=true)
 
     	ccall((:mgl_write_prc,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Bool), gr,pointer("$fname\0".data),pointer("$descr\0".data), make_pdf)
 end
 
-function DelFrame(gr::mglGraph, i::Cint)
+function delFrame(gr::mglGraph, i::Cint)
 
     	ccall((:mgl_del_frame,"libmgl2"), Void, (Ptr{Void},Cint), gr, i)
 end
 
-function GetFrame(gr::mglGraph, i::Cint)
+function getFrame(gr::mglGraph, i::Cint)
 
     	ccall((:mgl_get_frame,"libmgl2"), Void, (Ptr{Void},Cint), gr, i)
 end
 
-function SetFrame(gr::mglGraph, i::Cint)
+function setFrame(gr::mglGraph, i::Cint)
 
     	ccall((:mgl_set_frame,"libmgl2"), Void, (Ptr{Void},Cint), gr, i)
 end
 
-function ShowFrame(gr::mglGraph, i::Cint)
+function showFrame(gr::mglGraph, i::Cint)
 
     	ccall((:mgl_show_frame,"libmgl2"), Void, (Ptr{Void},Cint), gr, i)
 end
 
-function StartGIF(gr::mglGraph,fname::ASCIIString, ms::Cint=100)
+function startGIF(gr::mglGraph,fname::ASCIIString, ms::Cint=100)
 
     	ccall((:mgl_start_gif,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Cint), gr,pointer("$fname\0".data),ms)
 end
 
-function ExportMGLD(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
+function exportMGLD(gr::mglGraph,fname::ASCIIString,descr::ASCIIString="")
 
     	ccall((:mgl_export_mgld,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fname\0".data),pointer("$descr\0".data))
 end
 
-function ImportMGLD(gr::mglGraph,fname::ASCIIString, add::Bool=false)
+function importMGLD(gr::mglGraph,fname::ASCIIString, add::Bool=false)
 
     	ccall((:mgl_import_mgld,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Bool), gr,pointer("$fname\0".data), add)
 end
 
-function Clf(gr::mglGraph, r::Number, g::Number, b::Number)
+function clf(gr::mglGraph, r::Number, g::Number, b::Number)
 
     	ccall((:mgl_clf_rgb,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Cdouble), gr, r, g, b)
 end
 
-function Clf(gr::mglGraph,col::ASCIIString)
+function clf(gr::mglGraph,col::ASCIIString)
 
     	ccall((:mgl_clf_str,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$col\0".data))
 end
 
-function Clf(gr::mglGraph, col::Char)
+function clf(gr::mglGraph, col::Char)
 
     	ccall((:mgl_clf_str,"libmgl2"), Void, (Ptr{Void},Cchar), gr, col)
 end
 
-function Mark(gr::mglGraph, p::mglPoint,mark::ASCIIString)
+function mark(gr::mglGraph, p::mglPoint,mark::ASCIIString)
 
     	ccall((:mgl_mark,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Cchar}), gr, p.x, p.y, p.z,pointer("$mark\0".data))
 end
 
-function Line(gr::mglGraph, p1::mglPoint, p2::mglPoint, pen::ASCIIString="B", n::Int=2)
+function line(gr::mglGraph, p1::mglPoint, p2::mglPoint, pen::ASCIIString="B", n::Int=2)
 
     	ccall((:mgl_line,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cchar},Cint), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z,pointer("$pen\0".data), n)
 end
 
-function Curve(gr::mglGraph, p1::mglPoint, d1::mglPoint, p2::mglPoint, d2::mglPoint,pen::ASCIIString="B", n::Int=100)
+function curve(gr::mglGraph, p1::mglPoint, d1::mglPoint, p2::mglPoint, d2::mglPoint,pen::ASCIIString="B", n::Int=100)
 
     	ccall((:mgl_curve,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cchar},Cint), gr, p1.x, p1.y, p1.z, d1.x, d1.y, d1.z, p2.x, p2.y, p2.z, d2.x, d2.y, d2.z,pointer("$pen\0".data), n)
 end
 
-function Error(gr::mglGraph, p::mglPoint, e::mglPoint,pen::ASCIIString="k")
+function error(gr::mglGraph, p::mglPoint, e::mglPoint,pen::ASCIIString="k")
 
     	ccall((:mgl_error_box,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cchar}), gr, p.x, p.y, p.z, e.x, e.y, e.z,pointer("$pen\0".data))
 end
 
-function Face(gr::mglGraph, p1::mglPoint, p2::mglPoint, p3::mglPoint, p4::mglPoint,stl::ASCIIString="r")
+function face(gr::mglGraph, p1::mglPoint, p2::mglPoint, p3::mglPoint, p4::mglPoint,stl::ASCIIString="r")
 
     	ccall((:mgl_face,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cchar}), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, p3.x, p3.y, p3.z, p4.x, p4.y, p4.z,pointer("$stl\0".data))
 end
 
-function FaceX(gr::mglGraph, p::mglPoint, wy::Number, wz::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
+function faceX(gr::mglGraph, p::mglPoint, wy::Number, wz::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
 
     	ccall((:mgl_facex,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Cdouble,Cdouble,Ptr{Cchar},Cdouble,Cdouble), gr, p.x, p.y, p.z, wy, wz,pointer("$stl\0".data), dx, dy)
 end
 
-function FaceY(gr::mglGraph, p::mglPoint, wx::Number, wz::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
+function faceY(gr::mglGraph, p::mglPoint, wx::Number, wz::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
 
     	ccall((:mgl_facey,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Cdouble,Cdouble,Ptr{Cchar},Cdouble,Cdouble), gr, p.x, p.y, p.z, wx, wz,pointer("$stl\0".data), dx, dy)
 end
 
-function FaceZ(gr::mglGraph, p::mglPoint, wx::Number, wy::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
+function faceZ(gr::mglGraph, p::mglPoint, wx::Number, wy::Number,stl::ASCIIString="w", dx::Number=0.0, dy::Number=0.0)
 
     	ccall((:mgl_facez,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Cdouble,Cdouble,Ptr{Cchar},Cdouble,Cdouble), gr, p.x, p.y, p.z, wx, wy,pointer("$stl\0".data), dx, dy)
 end
 
-function Drop(gr::mglGraph, p::mglPoint, d::mglPoint, r::Number,col::ASCIIString="r", shift::Number=1.0, ap::Number=1.0)
+function drop(gr::mglGraph, p::mglPoint, d::mglPoint, r::Number,col::ASCIIString="r", shift::Number=1.0, ap::Number=1.0)
 
     	ccall((:mgl_drop,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Ptr{Cchar},Cdouble,Cdouble), gr, p.x, p.y, p.z, d.x, d.y, d.z, r,pointer("$col\0".data), shift, ap)
 end
 
-function Sphere(gr::mglGraph, p::mglPoint, r::Number,col::ASCIIString="r")
+function sphere(gr::mglGraph, p::mglPoint, r::Number,col::ASCIIString="r")
 
     	ccall((:mgl_sphere,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p.x, p.y, p.z, r,pointer("$col\0".data))
 end
 
-function Cone(gr::mglGraph, p1::mglPoint, p2::mglPoint, r1::Number, r2::Number=-1.0,stl::ASCIIString="r@")
+function cone(gr::mglGraph, p1::mglPoint, p2::mglPoint, r1::Number, r2::Number=-1.0,stl::ASCIIString="r@")
 
     	ccall((:mgl_cone,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Cdouble,Ptr{Cchar}), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z,r1,r2,pointer("$stl\0".data))
 end
 
-function Ellipse(gr::mglGraph, p1::mglPoint, p2::mglPoint, r::Number,stl::ASCIIString="r")
+function ellipse(gr::mglGraph, p1::mglPoint, p2::mglPoint, r::Number,stl::ASCIIString="r")
 
     	ccall((:mgl_ellipse,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, r,pointer("$stl\0".data))
 end
 
-function Circle(gr::mglGraph, p::mglPoint, r::Number,stl::ASCIIString="r")
+function circle(gr::mglGraph, p::mglPoint, r::Number,stl::ASCIIString="r")
 
     	ccall((:mgl_ellipse,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p.x, p.y, p.z, p.x, p.y, p.z, r,pointer("$stl\0".data))
 end
 
-function Rhomb(gr::mglGraph, p1::mglPoint, p2::mglPoint, r::Number,stl::ASCIIString="r")
+function rhomb(gr::mglGraph, p1::mglPoint, p2::mglPoint, r::Number,stl::ASCIIString="r")
 
     	ccall((:mgl_rhomb,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, r,pointer("$stl\0".data))
 end
 
-function Polygon(gr::mglGraph, p1::mglPoint, p2::mglPoint, n::Cint,stl::ASCIIString="r")
+function polygon(gr::mglGraph, p1::mglPoint, p2::mglPoint, n::Cint,stl::ASCIIString="r")
 
     	ccall((:mgl_polygon,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cint,Ptr{Cchar}), gr, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, n,pointer("$stl\0".data))
 end
 
-function Arc(gr::mglGraph, p0::mglPoint, pr::mglPoint, p1::mglPoint, a::Number,stl::ASCIIString="r")
+function arc(gr::mglGraph, p0::mglPoint, pr::mglPoint, p1::mglPoint, a::Number,stl::ASCIIString="r")
 
     	ccall((:mgl_arc_ext,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p0.x,p0.y,p0.z, pr.x,pr.y,pr.z, p1.x,p1.y,p1.z, a,pointer("$stl\0".data))
 end
 
-function Arc(gr::mglGraph, p0::mglPoint, p1::mglPoint, a::Number,stl::ASCIIString="r")
+function arc(gr::mglGraph, p0::mglPoint, p1::mglPoint, a::Number,stl::ASCIIString="r")
 
     	ccall((:mgl_arc_ext,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Cdouble,Ptr{Cchar}), gr, p0.x,p0.y,p0.z, 0,0,1, p1.x,p1.y,p0.z, a,pointer("$stl\0".data))
 end
 
-function Logo(gr::mglGraph, w::Clong, h::Clong, rgba::ASCIIString, smooth::Bool=false,opt::ASCIIString="")
+function logo(gr::mglGraph, w::Clong, h::Clong, rgba::ASCIIString, smooth::Bool=false,opt::ASCIIString="")
 
     	ccall((:mgl_logo,"libmgl2"), Void, (Ptr{Void},Clong,Clong,Ptr{Cchar},Bool,Ptr{Cchar}), gr, w, h, rgba, smooth,pointer("$opt\0".data))
 end
 
-function Logo(gr::mglGraph,fname::ASCIIString, smooth::Bool=false,opt::ASCIIString="")
+function logo(gr::mglGraph,fname::ASCIIString, smooth::Bool=false,opt::ASCIIString="")
 
     	ccall((:mgl_logo_file,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Bool,Ptr{Cchar}), gr,pointer("$fname\0".data), smooth,pointer("$opt\0".data))
 end
 
-function Putsw(gr::mglGraph, p::mglPoint, text::UTF8String,font::ASCIIString=":C",size::Number=-1.0)
+function putsw(gr::mglGraph, p::mglPoint, text::UTF8String,font::ASCIIString=":C",size::Number=-1.0)
 
     	ccall((:mgl_putsw,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Cwchar_t},Ptr{Cchar},Cdouble), gr, p.x, p.y, p.z, pointer("$text\0".data), font, size)
 end
 
-function Puts(gr::mglGraph, p::mglPoint,text::ASCIIString,font::ASCIIString=":C",size::Number=-1.0)
+function puts(gr::mglGraph, p::mglPoint,text::ASCIIString,font::ASCIIString=":C",size::Number=-1.0)
 
     	ccall((:mgl_puts,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Cchar},Ptr{Cchar},Cdouble), gr, p.x, p.y, p.z,pointer("$text\0".data), font, size)
 end
 
-function Putsw(gr::mglGraph, x::Number, y::Number, text::UTF8String,font::ASCIIString=":AC",size::Number=-1.0)
+function putsw(gr::mglGraph, x::Number, y::Number, text::UTF8String,font::ASCIIString=":AC",size::Number=-1.0)
 
 	ccall((:mgl_putsw,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Ptr{Cwchar_t},Ptr{Cchar},Cdouble), gr, x, y, 0, pointer("$text\0"), font, size)
 end
 
-function Puts(gr::mglGraph, x::Number, y::Number,text::ASCIIString,font::ASCIIString=":AC",size::Number=-1.0)
+function puts(gr::mglGraph, x::Number, y::Number,text::ASCIIString,font::ASCIIString=":AC",size::Number=-1.0)
 
     	ccall((:mgl_puts,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Ptr{Cchar},Ptr{Cchar},Cdouble), gr, x, y, 0,pointer("$text\0".data), font, size)
 end
 
-function Putsw(gr::mglGraph, p::mglPoint, d::mglPoint, text::UTF8String,font::ASCIIString=":L", size::Number=-1.0)
+function putsw(gr::mglGraph, p::mglPoint, d::mglPoint, text::UTF8String,font::ASCIIString=":L", size::Number=-1.0)
 
     	ccall((:mgl_putsw,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cwchar_t},Ptr{Cchar},Cdouble), gr, x, y, 0, pointer("$text\0".data),pointer("$font\0".data), size)
 end
 
-function Puts(gr::mglGraph, p::mglPoint, d::mglPoint,text::ASCIIString,font::ASCIIString=":L", size::Number=-1.0)
+function puts(gr::mglGraph, p::mglPoint, d::mglPoint,text::ASCIIString,font::ASCIIString=":L", size::Number=-1.0)
 
     	ccall((:mgl_puts,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,mreal,mreal,mreal,Ptr{Cchar},Ptr{Cchar},Cdouble), gr, x, y, 0,pointer("$text\0".data),pointer("$font\0".data), size)
 end
 
-function Text(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -786,20 +786,20 @@ function Text(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,font::AS
     	ccall((:mgl_text_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Text(gr::mglGraph,x::Array,y::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,x::Array,y::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_text_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Text(gr::mglGraph,y::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,y::Array,text::ASCIIString,font::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_text_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Text(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -807,92 +807,92 @@ function Text(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,font::AS
     	ccall((:mgl_text_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Text(gr::mglGraph,x::Array,y::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,x::Array,y::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_text_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Text(gr::mglGraph,y::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
+function text(gr::mglGraph,y::Array, text::UTF8String,font::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_text_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, pointer("$text\0".data),pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Box(gr::mglGraph,col::ASCIIString="", ticks::Bool=true)
+function box(gr::mglGraph,col::ASCIIString="", ticks::Bool=true)
 
     	ccall((:mgl_box_str,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Bool), gr,pointer("$col\0".data), ticks)
 end
 
-function Axis(gr::mglGraph,dir::ASCIIString="xyzt",stl::ASCIIString="",opt::ASCIIString="")
+function axis(gr::mglGraph,dir::ASCIIString="xyzt",stl::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_axis,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$dir\0".data),pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Grid(gr::mglGraph,dir::ASCIIString="xyzt",pen::ASCIIString="B",opt::ASCIIString="")
+function grid(gr::mglGraph,dir::ASCIIString="xyzt",pen::ASCIIString="B",opt::ASCIIString="")
 
     	ccall((:mgl_axis_grid,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$dir\0".data),pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph, dir::Char,text::ASCIIString, pos::Number=+1.0,opt::ASCIIString="")
+function label(gr::mglGraph, dir::Char,text::ASCIIString, pos::Number=+1.0,opt::ASCIIString="")
 
     	ccall((:mgl_label,"libmgl2"), Void, (Ptr{Void},Cchar,Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, dir,pointer("$text\0".data), pos,pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph, dir::Char, text::UTF8String, pos::Number=+1.0,opt::ASCIIString="")
+function label(gr::mglGraph, dir::Char, text::UTF8String, pos::Number=+1.0,opt::ASCIIString="")
 
     	ccall((:mgl_label,"libmgl2"), Void, (Ptr{Void},Cchar,Ptr{Cwchar_t},Cdouble,Ptr{Cchar}), gr, dir, pointer("$text\0".data), pos,pointer("$opt\0".data))
 end
 
-function Colorbar(gr::mglGraph,sch::ASCIIString="")
+function colorbar(gr::mglGraph,sch::ASCIIString="")
 
     	ccall((:mgl_colorbar,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar}), gr,pointer("$sch\0".data))
 end
 
-function Colorbar(gr::mglGraph,sch::ASCIIString, x::Number,y::Number,w::Number=1.0,h::Number=1.0)
+function colorbar(gr::mglGraph,sch::ASCIIString, x::Number,y::Number,w::Number=1.0,h::Number=1.0)
 
     	ccall((:mgl_colorbar_ext,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Cdouble,Cdouble,Cdouble,Cdouble), gr,pointer("$sch\0".data), x,y,w,h)
 end
 
-function Colorbar(gr::mglGraph,val::Array,sch::ASCIIString="")
+function colorbar(gr::mglGraph,val::Array,sch::ASCIIString="")
   valDat = mglData(val)
 
     	ccall((:mgl_colorbar_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar}), gr, valDat.data,pointer("$sch\0".data))
 end
 
-function Colorbar(gr::mglGraph,val::Array,sch::ASCIIString, x::Number,y::Number,w::Number=1.0,h::Number=1.0)
+function colorbar(gr::mglGraph,val::Array,sch::ASCIIString, x::Number,y::Number,w::Number=1.0,h::Number=1.0)
   valDat = mglData(val)
 
     	ccall((:mgl_colorbar_val_ext,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Cdouble,Cdouble,Cdouble), gr, valDat.data,pointer("$sch\0".data), x,y,w,h)
 end
 
-function AddLegend(gr::mglGraph,text::ASCIIString,style::ASCIIString)
+function addLegend(gr::mglGraph,text::ASCIIString,style::ASCIIString)
 
     	ccall((:mgl_add_legend,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$text\0".data),pointer("$style\0".data))
 end
 
-function AddLegend(gr::mglGraph, text::UTF8String,style::ASCIIString)
+function addLegend(gr::mglGraph, text::UTF8String,style::ASCIIString)
 
     	ccall((:mgl_add_legend,"libmgl2"), Void, (Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar}), gr, pointer("$text\0".data),pointer("$style\0".data))
 end
 
-function Legend(gr::mglGraph, x::Number, y::Number,font::ASCIIString="#",opt::ASCIIString="")
+function legend(gr::mglGraph, x::Number, y::Number,font::ASCIIString="#",opt::ASCIIString="")
 
     	ccall((:mgl_legend_pos,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Ptr{Cchar},Ptr{Cchar}), gr, x, y,pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function Legend(gr::mglGraph, where::Cint=3,font::ASCIIString="#",opt::ASCIIString="")
+function legend(gr::mglGraph, where::Cint=3,font::ASCIIString="#",opt::ASCIIString="")
 
     	ccall((:mgl_legend,"libmgl2"), Void, (Ptr{Void},Cint,Ptr{Cchar},Ptr{Cchar}), gr, where,pointer("$font\0".data),pointer("$opt\0".data))
 end
 
-function SetLegendMarks(gr::mglGraph, num::Cint)
+function setLegendMarks(gr::mglGraph, num::Cint)
 
     	ccall((:mgl_set_legend_marks,"libmgl2"), Void, (Ptr{Void},Cint), gr, num)
 end
 
-function Plot(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function plot(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -900,14 +900,14 @@ function Plot(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_plot_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Plot(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function plot(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_plot_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Plot(y::Array, pen::ASCIIString="", opt::ASCIIString="")
+function plot(y::Array, pen::ASCIIString="", opt::ASCIIString="")
         opStack=plotOpStack()
         push!(opStack, gr->SetRange(gr, 'y', minimum(y), maximum(y)), "Set ranges")
         push!(opStack, gr->Box(gr), "Box")
@@ -917,14 +917,14 @@ function Plot(y::Array, pen::ASCIIString="", opt::ASCIIString="")
 end
 
 
-function Plot(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function plot(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
 
   yDat = mglData(y)
     	ccall((:mgl_plot,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr,yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
     	
 end
 
-function Tape(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tape(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -932,26 +932,26 @@ function Tape(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_tape_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tape(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tape(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_tape_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tape(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tape(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_tape,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Radar(gr::mglGraph,a::Array,pen::ASCIIString="",opt::ASCIIString="")
+function radar(gr::mglGraph,a::Array,pen::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_radar,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Step(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function step(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -959,20 +959,20 @@ function Step(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_step_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Step(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function step(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_step_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Step(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function step(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_step,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tens(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tens(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -981,7 +981,7 @@ function Tens(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,pen::ASCIIString=
     	ccall((:mgl_tens_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, cDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tens(gr::mglGraph,x::Array,y::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tens(gr::mglGraph,x::Array,y::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   cDat = mglData(c)
@@ -989,14 +989,14 @@ function Tens(gr::mglGraph,x::Array,y::Array,c::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_tens_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, cDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tens(gr::mglGraph,y::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tens(gr::mglGraph,y::Array,c::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   cDat = mglData(c)
 
     	ccall((:mgl_tens,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, cDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Area(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function area(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1004,27 +1004,27 @@ function Area(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_area_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Area(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function area(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_area_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Area(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function area(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_area,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Region(gr::mglGraph,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function region(gr::mglGraph,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   y1Dat = mglData(y1)
   y2Dat = mglData(y2)
 
     	ccall((:mgl_region,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, y1Dat.data, y2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Region(gr::mglGraph,x::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function region(gr::mglGraph,x::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   y1Dat = mglData(y1)
   y2Dat = mglData(y2)
@@ -1032,7 +1032,7 @@ function Region(gr::mglGraph,x::Array,y1::Array,y2::Array,pen::ASCIIString="",op
     	ccall((:mgl_region_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, y1Dat.data, y2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Region(gr::mglGraph,x1::Array,y1::Array,z1::Array,x2::Array,y2::Array,z2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function region(gr::mglGraph,x1::Array,y1::Array,z1::Array,x2::Array,y2::Array,z2::Array,pen::ASCIIString="",opt::ASCIIString="")
   x1Dat = mglData(x1)
   y1Dat = mglData(y1)
   z1Dat = mglData(z1)
@@ -1043,7 +1043,7 @@ function Region(gr::mglGraph,x1::Array,y1::Array,z1::Array,x2::Array,y2::Array,z
     	mgl_region_3ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, x1Dat.data, y1Dat.data, z1Dat.data, x2Dat.data, y2Dat.data, z2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Region(gr::mglGraph,x1::Array,y1::Array,x2::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function region(gr::mglGraph,x1::Array,y1::Array,x2::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   x1Dat = mglData(x1)
   y1Dat = mglData(y1)
   x2Dat = mglData(x2)
@@ -1052,7 +1052,7 @@ function Region(gr::mglGraph,x1::Array,y1::Array,x2::Array,y2::Array,pen::ASCIIS
     	mgl_region_3ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, x1Dat.data, y1Dat.data, NULL, x2Dat.data, y2Dat.data, NULL,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Stem(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function stem(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1060,20 +1060,20 @@ function Stem(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_stem_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Stem(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function stem(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_stem_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Stem(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function stem(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_stem,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Bars(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function bars(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1081,39 +1081,39 @@ function Bars(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_bars_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Bars(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function bars(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_bars_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Bars(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function bars(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_bars,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Barh(gr::mglGraph,y::Array,v::Array,pen::ASCIIString="",opt::ASCIIString="")
+function barh(gr::mglGraph,y::Array,v::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   vDat = mglData(v)
 
     	ccall((:mgl_barh_yx,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, vDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Barh(gr::mglGraph,v::Array,pen::ASCIIString="",opt::ASCIIString="")
+function barh(gr::mglGraph,v::Array,pen::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
 
     	ccall((:mgl_barh,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Chart(gr::mglGraph,a::Array,colors::ASCIIString="",opt::ASCIIString="")
+function chart(gr::mglGraph,a::Array,colors::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_Cchart,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data,pointer("$colors\0".data),pointer("$opt\0".data))
 end
 
-function OHLC(gr::mglGraph,x::Array,open::Array,high::Array,low::Array,close::Array,pen::ASCIIString="",opt::ASCIIString="")
+function oHLC(gr::mglGraph,x::Array,open::Array,high::Array,low::Array,close::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   openDat = mglData(open)
   highDat = mglData(high)
@@ -1123,7 +1123,7 @@ function OHLC(gr::mglGraph,x::Array,open::Array,high::Array,low::Array,close::Ar
     	ccall((:mgl_ohlc_x,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, openDat.data, highDat.data, lowDat.data, closeDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function OHLC(gr::mglGraph,open::Array,high::Array,low::Array,close::Array,pen::ASCIIString="",opt::ASCIIString="")
+function oHLC(gr::mglGraph,open::Array,high::Array,low::Array,close::Array,pen::ASCIIString="",opt::ASCIIString="")
   openDat = mglData(open)
   highDat = mglData(high)
   lowDat = mglData(low)
@@ -1132,20 +1132,20 @@ function OHLC(gr::mglGraph,open::Array,high::Array,low::Array,close::Array,pen::
     	ccall((:mgl_ohlc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, openDat.data, highDat.data, lowDat.data, closeDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function BoxPlot(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function boxPlot(gr::mglGraph,x::Array,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_boxplot_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function BoxPlot(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function boxPlot(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_boxplot,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Candle(gr::mglGraph,x::Array,v1::Array,v2::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function candle(gr::mglGraph,x::Array,v1::Array,v2::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   v1Dat = mglData(v1)
   v2Dat = mglData(v2)
@@ -1155,7 +1155,7 @@ function Candle(gr::mglGraph,x::Array,v1::Array,v2::Array,y1::Array,y2::Array,pe
     	ccall((:mgl_candle_xyv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, v1Dat.data, v2Dat.data, y1Dat.data, y2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Candle(gr::mglGraph,v1::Array,v2::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function candle(gr::mglGraph,v1::Array,v2::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   v1Dat = mglData(v1)
   v2Dat = mglData(v2)
   y1Dat = mglData(y1)
@@ -1164,14 +1164,14 @@ function Candle(gr::mglGraph,v1::Array,v2::Array,y1::Array,y2::Array,pen::ASCIIS
     	ccall((:mgl_candle_yv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, v1Dat.data, v2Dat.data, y1Dat.data, y2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Candle(gr::mglGraph,v1::Array,v2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function candle(gr::mglGraph,v1::Array,v2::Array,pen::ASCIIString="",opt::ASCIIString="")
   v1Dat = mglData(v1)
   v2Dat = mglData(v2)
 
     	ccall((:mgl_candle_yv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, v1Dat.data, v2Dat.data, NULL, NULL,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Candle(gr::mglGraph,y::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
+function candle(gr::mglGraph,y::Array,y1::Array,y2::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   y1Dat = mglData(y1)
   y2Dat = mglData(y2)
@@ -1179,13 +1179,13 @@ function Candle(gr::mglGraph,y::Array,y1::Array,y2::Array,pen::ASCIIString="",op
     	ccall((:mgl_candle,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, y1Dat.data, y2Dat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Candle(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
+function candle(gr::mglGraph,y::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_candle,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, NULL, NULL,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Cones(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
+function cones(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1193,27 +1193,27 @@ function Cones(gr::mglGraph,x::Array,y::Array,z::Array,pen::ASCIIString="@",opt:
     	ccall((:mgl_cones_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Cones(gr::mglGraph,x::Array,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
+function cones(gr::mglGraph,x::Array,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
   xDat = mglData(x)
   zDat = mglData(z)
 
     	ccall((:mgl_cones_xz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Cones(gr::mglGraph,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
+function cones(gr::mglGraph,z::Array,pen::ASCIIString="@",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_cones,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Error(gr::mglGraph,y::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
+function error(gr::mglGraph,y::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   eyDat = mglData(ey)
 
     	ccall((:mgl_error,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, eyDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Error(gr::mglGraph,x::Array,y::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
+function error(gr::mglGraph,x::Array,y::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   eyDat = mglData(ey)
@@ -1221,7 +1221,7 @@ function Error(gr::mglGraph,x::Array,y::Array,ey::Array,pen::ASCIIString="",opt:
     	ccall((:mgl_error_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, eyDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Error(gr::mglGraph,x::Array,y::Array,ex::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
+function error(gr::mglGraph,x::Array,y::Array,ex::Array,ey::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   exDat = mglData(ex)
@@ -1230,7 +1230,7 @@ function Error(gr::mglGraph,x::Array,y::Array,ex::Array,ey::Array,pen::ASCIIStri
     	ccall((:mgl_error_exy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, exDat.data, eyDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Mark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
+function mark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1239,7 +1239,7 @@ function Mark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString,
     	ccall((:mgl_mark_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Mark(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
+function mark(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   rDat = mglData(r)
@@ -1247,14 +1247,14 @@ function Mark(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString,opt::ASCI
     	ccall((:mgl_mark_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Mark(gr::mglGraph,y::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
+function mark(gr::mglGraph,y::Array,r::Array,pen::ASCIIString,opt::ASCIIString="")
   yDat = mglData(y)
   rDat = mglData(r)
 
     	ccall((:mgl_mark_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1263,7 +1263,7 @@ function TextMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,text::ASCIISt
     	ccall((:mgl_textmark_xyzr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, rDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,x::Array,y::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,x::Array,y::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   rDat = mglData(r)
@@ -1271,20 +1271,20 @@ function TextMark(gr::mglGraph,x::Array,y::Array,r::Array,text::ASCIIString,fnt:
     	ccall((:mgl_textmark_xyr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, rDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,y::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,y::Array,r::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   rDat = mglData(r)
 
     	ccall((:mgl_textmark_yr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, rDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,y::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,y::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_textmark,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1293,7 +1293,7 @@ function TextMark(gr::mglGraph,x::Array,y::Array,z::Array,r::Array, text::UTF8St
     	ccall((:mgl_textmark_xyzr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, rDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,x::Array,y::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,x::Array,y::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   rDat = mglData(r)
@@ -1301,20 +1301,20 @@ function TextMark(gr::mglGraph,x::Array,y::Array,r::Array, text::UTF8String,fnt:
     	ccall((:mgl_textmark_xyr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, rDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,y::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,y::Array,r::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   rDat = mglData(r)
 
     	ccall((:mgl_textmark_yr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, rDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function TextMark(gr::mglGraph,y::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function textMark(gr::mglGraph,y::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_textmark,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1322,19 +1322,19 @@ function Label(gr::mglGraph,x::Array,y::Array,z::Array,text::ASCIIString,fnt::AS
     	ccall((:mgl_label_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph,x::Array,y::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph,x::Array,y::Array,text::ASCIIString,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_label_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph, y::Array,text::ASCIIString, fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph, y::Array,text::ASCIIString, fnt::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_label,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, dir,pointer("$text\0".data), pos,pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1342,43 +1342,43 @@ function Label(gr::mglGraph,x::Array,y::Array,z::Array, text::UTF8String,fnt::AS
     	ccall((:mgl_label_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph,x::Array,y::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph,x::Array,y::Array, text::UTF8String,fnt::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_label_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Label(gr::mglGraph, y::Array, text::UTF8String, fnt::ASCIIString="",opt::ASCIIString="")
+function label(gr::mglGraph, y::Array, text::UTF8String, fnt::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_label,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, dir, pointer("$text\0".data), pos,pointer("$opt\0".data))
 end
 
-function Table(gr::mglGraph,val::Array,text::ASCIIString,fnt::ASCIIString="#|",opt::ASCIIString="")
+function table(gr::mglGraph,val::Array,text::ASCIIString,fnt::ASCIIString="#|",opt::ASCIIString="")
   valDat = mglData(val)
 
     	ccall((:mgl_table,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, 0, 0, valDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Table(gr::mglGraph,val::Array, text::UTF8String,fnt::ASCIIString="#|",opt::ASCIIString="")
+function table(gr::mglGraph,val::Array, text::UTF8String,fnt::ASCIIString="#|",opt::ASCIIString="")
   valDat = mglData(val)
 
     	ccall((:mgl_table,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, 0, 0, valDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Table(gr::mglGraph, x::Number, y::Number,val::Array,text::ASCIIString,fnt::ASCIIString="#|",opt::ASCIIString="")
+function table(gr::mglGraph, x::Number, y::Number,val::Array,text::ASCIIString,fnt::ASCIIString="#|",opt::ASCIIString="")
   valDat = mglData(val)
 
     	ccall((:mgl_table,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr, x, y, valDat.data,pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Table(gr::mglGraph, x::Number, y::Number,val::Array, text::UTF8String,fnt::ASCIIString="#|",opt::ASCIIString="")
+function table(gr::mglGraph, x::Number, y::Number,val::Array, text::UTF8String,fnt::ASCIIString="#|",opt::ASCIIString="")
   valDat = mglData(val)
 
     	ccall((:mgl_table,"libmgl2"), Void, (Ptr{Void},Cdouble,Cdouble,Ptr{Void},Ptr{Cwchar_t},Ptr{Cchar},Ptr{Cchar}), gr, x, y, valDat.data, pointer("$text\0".data),pointer("$fnt\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1387,7 +1387,7 @@ function Tube(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,pen::ASCIIString=
     	ccall((:mgl_tube_xyzr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,x::Array,y::Array,z::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,x::Array,y::Array,z::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1395,7 +1395,7 @@ function Tube(gr::mglGraph,x::Array,y::Array,z::Array, r::Number,pen::ASCIIStrin
     	ccall((:mgl_tube_xyzr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Cdouble,Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, r,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   rDat = mglData(r)
@@ -1403,34 +1403,34 @@ function Tube(gr::mglGraph,x::Array,y::Array,r::Array,pen::ASCIIString="",opt::A
     	ccall((:mgl_tube_xyr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,x::Array,y::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,x::Array,y::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
 
     	ccall((:mgl_tube_xyr,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Cdouble,Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, r,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,y::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,y::Array,r::Array,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
   rDat = mglData(r)
 
     	ccall((:mgl_tube_r,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, rDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Tube(gr::mglGraph,y::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
+function tube(gr::mglGraph,y::Array, r::Number,pen::ASCIIString="",opt::ASCIIString="")
   yDat = mglData(y)
 
     	ccall((:mgl_tube_r,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Cdouble,Ptr{Cchar},Ptr{Cchar}), gr, yDat.data, r,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Torus(gr::mglGraph,r::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
+function torus(gr::mglGraph,r::Array,z::Array,pen::ASCIIString="",opt::ASCIIString="")
   rDat = mglData(r)
   zDat = mglData(z)
 
     	ccall((:mgl_torus,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, rDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Mesh(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function mesh(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1438,13 +1438,13 @@ function Mesh(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_mesh_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Mesh(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function mesh(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_mesh,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Fall(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function fall(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1452,13 +1452,13 @@ function Fall(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_fall_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Fall(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function fall(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_fall,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Belt(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function belt(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1466,13 +1466,13 @@ function Belt(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_belt_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Belt(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function belt(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_belt,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1480,7 +1480,7 @@ function Surf(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_surf_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf(z::Array{mreal, 2}, stl::ASCIIString="", opt::ASCIIString="")
+function surf(z::Array{mreal, 2}, stl::ASCIIString="", opt::ASCIIString="")
         opStack=plotOpStack()
         push!(opStack, gr->SetRange(gr, 'z', minimum(z), maximum(z)), "Set z range")
 	push!(opStack, gr->SetRange(gr, 'x', 0, size(z, 2)), "Set x range")
@@ -1492,13 +1492,13 @@ function Surf(z::Array{mreal, 2}, stl::ASCIIString="", opt::ASCIIString="")
         return opStack
 end
 
-function Surf(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
         data=mglData(z)
     	ccall((:mgl_surf,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, data.data, pointer("$stl\0".data),pointer("$opt\0".data))
     	
 end
 
-function Grid(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function grid(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1506,12 +1506,12 @@ function Grid(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_grid_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Grid(gr::mglGraph, z::Array, stl::ASCIIString="",opt::ASCIIString="")
+function grid(gr::mglGraph, z::Array, stl::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_axis_grid,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, dir, pen,pointer("$opt\0".data))
 end
 
-function Tile(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function tile(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1519,13 +1519,13 @@ function Tile(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_tile_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Tile(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function tile(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_tile,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Dens(gr::mglGraph,x::Array,y::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function dens(gr::mglGraph,x::Array,y::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   cDat = mglData(c)
@@ -1533,13 +1533,13 @@ function Dens(gr::mglGraph,x::Array,y::Array,c::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_dens_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Dens(gr::mglGraph,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function dens(gr::mglGraph,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   cDat = mglData(c)
 
     	ccall((:mgl_dens,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Dens(c::Array, stl::ASCIIString="", opt::ASCIIString="")
+function dens(c::Array, stl::ASCIIString="", opt::ASCIIString="")
 	opStack = plotOpStack()
 	push!(opStack, gr->SetRange(gr, 'c', minimum(c), maximum(c)))
 	push!(opStack, gr->SetRange(gr, 'x', 0, size(c)[2]))
@@ -1551,7 +1551,7 @@ function Dens(c::Array, stl::ASCIIString="", opt::ASCIIString="")
 	return opStack
 end
 
-function Boxs(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function boxs(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1559,13 +1559,13 @@ function Boxs(gr::mglGraph,x::Array,y::Array,z::Array,stl::ASCIIString="",opt::A
     	ccall((:mgl_boxs_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Boxs(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
+function boxs(gr::mglGraph,z::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_boxs,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Cont(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function cont(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1574,14 +1574,14 @@ function Cont(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString=
     	ccall((:mgl_cont_xy_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Cont(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function cont(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   zDat = mglData(z)
 
     	ccall((:mgl_cont_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Cont(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function cont(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1589,13 +1589,13 @@ function Cont(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::A
     	ccall((:mgl_cont_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Cont(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function cont(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_cont,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContF(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contF(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1604,14 +1604,14 @@ function ContF(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString
     	ccall((:mgl_contf_xy_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContF(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contF(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   zDat = mglData(z)
 
     	ccall((:mgl_contf_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContF(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contF(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1619,13 +1619,13 @@ function ContF(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::
     	ccall((:mgl_contf_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContF(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contF(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_contf,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContD(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contD(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1634,14 +1634,14 @@ function ContD(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString
     	ccall((:mgl_contd_xy_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContD(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contD(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   zDat = mglData(z)
 
     	ccall((:mgl_contd_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContD(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contD(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1649,13 +1649,13 @@ function ContD(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::
     	ccall((:mgl_contd_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContD(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contD(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_contd,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContV(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contV(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1664,14 +1664,14 @@ function ContV(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString
     	ccall((:mgl_contv_xy_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContV(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contV(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   zDat = mglData(z)
 
     	ccall((:mgl_contv_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContV(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contV(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1679,13 +1679,13 @@ function ContV(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::
     	ccall((:mgl_contv_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function ContV(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function contV(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_contv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Axial(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function axial(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1694,14 +1694,14 @@ function Axial(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,sch::ASCIIString
     	ccall((:mgl_axial_xy_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Axial(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function axial(gr::mglGraph,v::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   zDat = mglData(z)
 
     	ccall((:mgl_axial_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Axial(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function axial(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1709,13 +1709,13 @@ function Axial(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::
     	ccall((:mgl_axial_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Axial(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function axial(gr::mglGraph,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
 
     	ccall((:mgl_axial,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Grid3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function grid3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1724,13 +1724,13 @@ function Grid3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString
     	mgl_grid3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Grid3(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function grid3(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_grid3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Dens3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function dens3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1739,13 +1739,13 @@ function Dens3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString
     	mgl_dens3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Dens3(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function dens3(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_dens3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Surf3(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1754,13 +1754,13 @@ function Surf3(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,stl
     	mgl_surf3ccall((:_xyz_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3(gr::mglGraph, Val::Number,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3(gr::mglGraph, Val::Number,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_surf3ccall((:_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1769,13 +1769,13 @@ function Surf3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString
     	mgl_surf3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3(gr::mglGraph,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3(gr::mglGraph,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_surf3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Cloud(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function cloud(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1784,13 +1784,13 @@ function Cloud(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,stl::ASCIIString
     	ccall((:mgl_cloud_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Cloud(gr::mglGraph,a::Array,stl::ASCIIString="",opt::ASCIIString="")
+function cloud(gr::mglGraph,a::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_cloud,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Cont3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function cont3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1800,14 +1800,14 @@ function Cont3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::AS
     	mgl_cont3ccall((:_xyz_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Cont3(gr::mglGraph,v::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function cont3(gr::mglGraph,v::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	mgl_cont3ccall((:_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Cont3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function cont3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1816,13 +1816,13 @@ function Cont3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString
     	mgl_cont3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Cont3(gr::mglGraph,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function cont3(gr::mglGraph,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_cont3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContF3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function contF3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   vDat = mglData(v)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -1832,14 +1832,14 @@ function ContF3(gr::mglGraph,v::Array,x::Array,y::Array,z::Array,a::Array,sch::A
     	mgl_contf3ccall((:_xyz_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContF3(gr::mglGraph,v::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function contF3(gr::mglGraph,v::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	mgl_contf3ccall((:_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContF3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function contF3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1848,13 +1848,13 @@ function ContF3(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIStrin
     	mgl_contf3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContF3(gr::mglGraph,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function contF3(gr::mglGraph,a::Array,sch::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   aDat = mglData(a)
 
     	mgl_contf3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$sch\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Beam(gr::mglGraph,tr::Array,g1::Array,g2::Array,a::Array, r::Number,stl::ASCIIString=0, flag::Cint=0, num::Cint=3)
+function beam(gr::mglGraph,tr::Array,g1::Array,g2::Array,a::Array, r::Number,stl::ASCIIString=0, flag::Cint=0, num::Cint=3)
   trDat = mglData(tr)
   g1Dat = mglData(g1)
   g2Dat = mglData(g2)
@@ -1863,7 +1863,7 @@ function Beam(gr::mglGraph,tr::Array,g1::Array,g2::Array,a::Array, r::Number,stl
     	ccall((:mgl_beam,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Cdouble,Ptr{Cchar},Cint,Cint), gr, trDat.data, g1Dat.data, g2Dat.data, aDat.data,r,pointer("$stl\0".data),flag,num)
 end
 
-function TileS(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,stl::ASCIIString="",opt::ASCIIString="")
+function tileS(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1872,14 +1872,14 @@ function TileS(gr::mglGraph,x::Array,y::Array,z::Array,r::Array,stl::ASCIIString
     	ccall((:mgl_tiles_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, rDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function TileS(gr::mglGraph,z::Array,r::Array,stl::ASCIIString="",opt::ASCIIString="")
+function tileS(gr::mglGraph,z::Array,r::Array,stl::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
   rDat = mglData(r)
 
     	ccall((:mgl_tiles,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data, rDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function SurfC(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfC(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1888,14 +1888,14 @@ function SurfC(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString
     	ccall((:mgl_surfc_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function SurfC(gr::mglGraph,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfC(gr::mglGraph,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
   cDat = mglData(c)
 
     	ccall((:mgl_surfc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function SurfA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1904,14 +1904,14 @@ function SurfA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString
     	ccall((:mgl_surfa_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function SurfA(gr::mglGraph,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfA(gr::mglGraph,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
   cDat = mglData(c)
 
     	ccall((:mgl_surfa,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function SurfCA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfCA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1921,7 +1921,7 @@ function SurfCA(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::A
     	ccall((:mgl_surfca_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, cDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function SurfCA(gr::mglGraph,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function surfCA(gr::mglGraph,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   zDat = mglData(z)
   cDat = mglData(c)
   aDat = mglData(a)
@@ -1929,7 +1929,7 @@ function SurfCA(gr::mglGraph,z::Array,c::Array,a::Array,sch::ASCIIString="",opt:
     	ccall((:mgl_surfca,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, zDat.data, cDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Map(gr::mglGraph,x::Array,y::Array,a::Array,b::Array,sch::ASCIIString="",opt::ASCIIString="")
+function map(gr::mglGraph,x::Array,y::Array,a::Array,b::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   aDat = mglData(a)
@@ -1938,14 +1938,14 @@ function Map(gr::mglGraph,x::Array,y::Array,a::Array,b::Array,sch::ASCIIString="
     	ccall((:mgl_map_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, aDat.data, bDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Map(gr::mglGraph,a::Array,b::Array,sch::ASCIIString="",opt::ASCIIString="")
+function map(gr::mglGraph,a::Array,b::Array,sch::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   bDat = mglData(b)
 
     	ccall((:mgl_map,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data, bDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function STFA(gr::mglGraph,x::Array,y::Array,re::Array,im::Array, dn::Cint,sch::ASCIIString="",opt::ASCIIString="")
+function sTFA(gr::mglGraph,x::Array,y::Array,re::Array,im::Array, dn::Cint,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   reDat = mglData(re)
@@ -1954,14 +1954,14 @@ function STFA(gr::mglGraph,x::Array,y::Array,re::Array,im::Array, dn::Cint,sch::
     	ccall((:mgl_stfa_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Cint,Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, reDat.data, imDat.data, dn,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function STFA(gr::mglGraph,re::Array,im::Array, dn::Cint,sch::ASCIIString="",opt::ASCIIString="")
+function sTFA(gr::mglGraph,re::Array,im::Array, dn::Cint,sch::ASCIIString="",opt::ASCIIString="")
   reDat = mglData(re)
   imDat = mglData(im)
 
     	ccall((:mgl_stfa,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Cint,Ptr{Cchar},Ptr{Cchar}), gr, reDat.data, imDat.data, dn,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Surf3A(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3A(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1971,14 +1971,14 @@ function Surf3A(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,b:
     	mgl_surf3ccall((:a_xyz_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, xDat.data, yDat.data, zDat.data, aDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3A(gr::mglGraph, Val::Number,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3A(gr::mglGraph, Val::Number,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   bDat = mglData(b)
 
     	mgl_surf3ccall((:a_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, aDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3A(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3A(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -1988,14 +1988,14 @@ function Surf3A(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,b::Array,stl::A
     	mgl_surf3ccall((:a_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3A(gr::mglGraph,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3A(gr::mglGraph,a::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   bDat = mglData(b)
 
     	mgl_surf3ccall((:a,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3C(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3C(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2005,14 +2005,14 @@ function Surf3C(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c:
     	mgl_surf3ccall((:c_xyz_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, xDat.data, yDat.data, zDat.data, aDat.data, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3C(gr::mglGraph, Val::Number,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3C(gr::mglGraph, Val::Number,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   cDat = mglData(c)
 
     	mgl_surf3ccall((:c_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, aDat.data, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3C(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3C(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2022,14 +2022,14 @@ function Surf3C(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,stl::A
     	mgl_surf3ccall((:c_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3C(gr::mglGraph,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3C(gr::mglGraph,a::Array,c::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   cDat = mglData(c)
 
     	mgl_surf3ccall((:c,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data, cDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3CA(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3CA(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2040,7 +2040,7 @@ function Surf3CA(gr::mglGraph, Val::Number,x::Array,y::Array,z::Array,a::Array,c
     	mgl_surf3ccall((:ca_xyz_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, xDat.data, yDat.data, zDat.data, aDat.data, cDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3CA(gr::mglGraph, Val::Number,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3CA(gr::mglGraph, Val::Number,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   cDat = mglData(c)
   bDat = mglData(b)
@@ -2048,7 +2048,7 @@ function Surf3CA(gr::mglGraph, Val::Number,a::Array,c::Array,b::Array,stl::ASCII
     	mgl_surf3ccall((:ca_val,"libmgl2"), Void, (Ptr{Void},Cdouble,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, Val, aDat.data, cDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3CA(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3CA(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2059,7 +2059,7 @@ function Surf3CA(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,c::Array,b::Ar
     	mgl_surf3ccall((:ca_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data, cDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Surf3CA(gr::mglGraph,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
+function surf3CA(gr::mglGraph,a::Array,c::Array,b::Array,stl::ASCIIString="",opt::ASCIIString="")
   aDat = mglData(a)
   cDat = mglData(c)
   bDat = mglData(b)
@@ -2067,7 +2067,7 @@ function Surf3CA(gr::mglGraph,a::Array,c::Array,b::Array,stl::ASCIIString="",opt
     	mgl_surf3ccall((:ca,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, aDat.data, cDat.data, bDat.data,pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function Dew(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function dew(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2076,14 +2076,14 @@ function Dew(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString
     	ccall((:mgl_dew_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Dew(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function dew(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
 
     	mgl_dew_2ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Traj(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function traj(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2092,7 +2092,7 @@ function Traj(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIStrin
     	ccall((:mgl_traj_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Traj(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function traj(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2103,7 +2103,7 @@ function Traj(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Ar
     	ccall((:mgl_traj_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Vect(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function vect(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2112,14 +2112,14 @@ function Vect(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIStrin
     	ccall((:mgl_vect_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Vect(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function vect(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
 
     	mgl_vect_2ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Vect(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function vect(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2130,7 +2130,7 @@ function Vect(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Ar
     	ccall((:mgl_vect_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Vect(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function vect(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
   azDat = mglData(az)
@@ -2138,7 +2138,7 @@ function Vect(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt
     	mgl_vect_3ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Vect3(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function vect3(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2149,7 +2149,7 @@ function Vect3(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::A
     	mgl_vect3ccall((:_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Vect3(gr::mglGraph,ax::Array,ay::Array,az::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
+function vect3(gr::mglGraph,ax::Array,ay::Array,az::Array,stl::ASCIIString="", sVal::Number=-1.0,opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
   azDat = mglData(az)
@@ -2157,7 +2157,7 @@ function Vect3(gr::mglGraph,ax::Array,ay::Array,az::Array,stl::ASCIIString="", s
     	mgl_vect3ccall((:,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, axDat.data, ayDat.data, azDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function Flow(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flow(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2166,14 +2166,14 @@ function Flow(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIStrin
     	ccall((:mgl_flow_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Flow(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flow(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
 
     	mgl_flow_2ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Flow(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flow(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2184,7 +2184,7 @@ function Flow(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Ar
     	ccall((:mgl_flow_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Flow(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flow(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
   azDat = mglData(az)
@@ -2192,7 +2192,7 @@ function Flow(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt
     	mgl_flow_3ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function FlowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2201,14 +2201,14 @@ function FlowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,ax::Array,ay::Array,s
     	ccall((:mgl_flowp_xy,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, p.x, p.y, p.z, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function FlowP(gr::mglGraph, p::mglPoint,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flowP(gr::mglGraph, p::mglPoint,ax::Array,ay::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
 
     	mgl_flowp_2ccall((:d,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, p.x, p.y, p.z, axDat.data, ayDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function FlowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2219,7 +2219,7 @@ function FlowP(gr::mglGraph, p::mglPoint,x::Array,y::Array,z::Array,ax::Array,ay
     	ccall((:mgl_flowp_xyz,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, p.x, p.y, p.z, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function FlowP(gr::mglGraph, p::mglPoint,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
+function flowP(gr::mglGraph, p::mglPoint,ax::Array,ay::Array,az::Array,sch::ASCIIString="",opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
   azDat = mglData(az)
@@ -2227,7 +2227,7 @@ function FlowP(gr::mglGraph, p::mglPoint,ax::Array,ay::Array,az::Array,sch::ASCI
     	mgl_flowp_3ccall((:d,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, p.x, p.y, p.z, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Pipe(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
+function pipe(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   axDat = mglData(ax)
@@ -2236,14 +2236,14 @@ function Pipe(gr::mglGraph,x::Array,y::Array,ax::Array,ay::Array,sch::ASCIIStrin
     	ccall((:mgl_pipe_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, axDat.data, ayDat.data,pointer("$sch\0".data), r0,pointer("$opt\0".data))
 end
 
-function Pipe(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
+function pipe(gr::mglGraph,ax::Array,ay::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
 
     	mgl_pipe_2ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, axDat.data, ayDat.data,pointer("$sch\0".data), r0,pointer("$opt\0".data))
 end
 
-function Pipe(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
+function pipe(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2254,7 +2254,7 @@ function Pipe(gr::mglGraph,x::Array,y::Array,z::Array,ax::Array,ay::Array,az::Ar
     	ccall((:mgl_pipe_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data), r0,pointer("$opt\0".data))
 end
 
-function Pipe(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
+function pipe(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="", r0::Number=0.05,opt::ASCIIString="")
   axDat = mglData(ax)
   ayDat = mglData(ay)
   azDat = mglData(az)
@@ -2262,123 +2262,123 @@ function Pipe(gr::mglGraph,ax::Array,ay::Array,az::Array,sch::ASCIIString="", r0
     	mgl_pipe_3ccall((:d,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, axDat.data, ayDat.data, azDat.data,pointer("$sch\0".data), r0,pointer("$opt\0".data))
 end
 
-function DensX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function densX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_dens_x,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function DensY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function densY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_dens_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function DensZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function densZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_dens_z,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_cont_x,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContX(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contX(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_cont_x_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_cont_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContY(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contY(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_cont_y_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_cont_z,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContZ(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contZ(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_cont_z_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFX(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_contf_x,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFX(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFX(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_contf_x_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFY(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_contf_y,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFY(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFY(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_contf_y_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFZ(gr::mglGraph,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   aDat = mglData(a)
 
     	ccall((:mgl_contf_z,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function ContFZ(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
+function contFZ(gr::mglGraph,v::Array,a::Array,stl::ASCIIString="", sVal::Number=mglNaN,opt::ASCIIString="")
   vDat = mglData(v)
   aDat = mglData(a)
 
     	ccall((:mgl_contf_z_val,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Cdouble,Ptr{Cchar}), gr, vDat.data, aDat.data,pointer("$stl\0".data), sVal,pointer("$opt\0".data))
 end
 
-function FPlot(gr::mglGraph,fy::ASCIIString,stl::ASCIIString="",opt::ASCIIString="")
+function fPlot(gr::mglGraph,fy::ASCIIString,stl::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_fplot,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fy\0".data),pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function FPlot(gr::mglGraph,fx::ASCIIString,fy::ASCIIString,fz::ASCIIString,stl::ASCIIString,opt::ASCIIString="")
+function fPlot(gr::mglGraph,fx::ASCIIString,fy::ASCIIString,fz::ASCIIString,stl::ASCIIString,opt::ASCIIString="")
 
     	ccall((:mgl_fplot_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fx\0".data),pointer("$fy\0".data),pointer("$fz\0".data),pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function FSurf(gr::mglGraph,fz::ASCIIString,stl::ASCIIString="",opt::ASCIIString="")
+function fSurf(gr::mglGraph,fz::ASCIIString,stl::ASCIIString="",opt::ASCIIString="")
 
     	ccall((:mgl_fsurf,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fz\0".data),pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function FSurf(gr::mglGraph,fx::ASCIIString,fy::ASCIIString,fz::ASCIIString,stl::ASCIIString,opt::ASCIIString="")
+function fSurf(gr::mglGraph,fx::ASCIIString,fy::ASCIIString,fz::ASCIIString,stl::ASCIIString,opt::ASCIIString="")
 
     	ccall((:mgl_fsurf_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar},Ptr{Cchar}), gr,pointer("$fx\0".data),pointer("$fy\0".data),pointer("$fz\0".data),pointer("$stl\0".data),pointer("$opt\0".data))
 end
 
-function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2388,7 +2388,7 @@ function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,sc
     	ccall((:mgl_triplot_xyzc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2397,7 +2397,7 @@ function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIS
     	ccall((:mgl_triplot_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2405,7 +2405,7 @@ function TriPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString="",
     	ccall((:mgl_triplot_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
+function quadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2415,7 +2415,7 @@ function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,c::Array,s
     	ccall((:mgl_quadplot_xyzc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data, cDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function quadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2424,7 +2424,7 @@ function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCII
     	ccall((:mgl_quadplot_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString="",opt::ASCIIString="")
+function quadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2432,7 +2432,7 @@ function QuadPlot(gr::mglGraph,nums::Array,x::Array,y::Array,sch::ASCIIString=""
     	ccall((:mgl_quadplot_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2441,7 +2441,7 @@ function TriCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIS
     	ccall((:mgl_tricont_xyc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   numsDat = mglData(nums)
   xDat = mglData(x)
@@ -2451,7 +2451,7 @@ function TriContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,s
     	ccall((:mgl_tricont_xycv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, numsDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2461,7 +2461,7 @@ function TriCont(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,sc
     	ccall((:mgl_tricont_xyzc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   numsDat = mglData(nums)
   xDat = mglData(x)
@@ -2472,7 +2472,7 @@ function TriContV(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a
     	ccall((:mgl_tricont_xyzcv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, numsDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriCont(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triCont(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   numsDat = mglData(nums)
   xDat = mglData(x)
@@ -2483,7 +2483,7 @@ function TriCont(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a:
     	ccall((:mgl_tricont_xyzcv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, numsDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2492,7 +2492,7 @@ function TriContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,sch::ASCI
     	ccall((:mgl_tricontv_xyc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   numsDat = mglData(nums)
   xDat = mglData(x)
   yDat = mglData(y)
@@ -2502,7 +2502,7 @@ function TriContVt(gr::mglGraph,nums::Array,x::Array,y::Array,z::Array,a::Array,
     	ccall((:mgl_tricontv_xyzc,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, numsDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function TriContVt(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function triContVt(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   vDat = mglData(v)
   numsDat = mglData(nums)
   xDat = mglData(x)
@@ -2513,7 +2513,7 @@ function TriContVt(gr::mglGraph,v::Array,nums::Array,x::Array,y::Array,z::Array,
     	ccall((:mgl_tricontv_xyzcv,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, vDat.data, numsDat.data, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Dots(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function dots(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2521,7 +2521,7 @@ function Dots(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::A
     	ccall((:mgl_dots,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Dots(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function dots(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2530,7 +2530,7 @@ function Dots(gr::mglGraph,x::Array,y::Array,z::Array,a::Array,sch::ASCIIString=
     	ccall((:mgl_dots_a,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Dots(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
+function dots(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2540,7 +2540,7 @@ function Dots(gr::mglGraph,x::Array,y::Array,z::Array,c::Array,a::Array,sch::ASC
     	ccall((:mgl_dots_ca,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data, cDat.data, aDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function Crust(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
+function crust(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::ASCIIString="")
   xDat = mglData(x)
   yDat = mglData(y)
   zDat = mglData(z)
@@ -2548,25 +2548,25 @@ function Crust(gr::mglGraph,x::Array,y::Array,z::Array,sch::ASCIIString="",opt::
     	ccall((:mgl_crust,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$sch\0".data),pointer("$opt\0".data))
 end
 
-function PutsFit(gr::mglGraph, p::mglPoint,prefix::ASCIIString=0,font::ASCIIString="", size::Number=-1.0)
+function putsFit(gr::mglGraph, p::mglPoint,prefix::ASCIIString=0,font::ASCIIString="", size::Number=-1.0)
 
     	ccall((:mgl_puts_fit,"libmgl2"), Void, (Ptr{Void},mreal,mreal,mreal,Ptr{Cchar},Ptr{Cchar},Cdouble), gr, p.x, p.y, p.z,pointer("$prefix\0".data),pointer("$font\0".data), size)
 end
 
-function Fill(gr::mglGraph,u::Array,eq::ASCIIString,opt::ASCIIString="")
+function fill(gr::mglGraph,u::Array,eq::ASCIIString,opt::ASCIIString="")
   uDat = mglData(u)
 
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglData,Ptr{Cchar},Ptr{Cchar}), gr, uDat.data,pointer("$eq\0".data), 0, 0,pointer("$opt\0".data))
 end
 
-function Fill(gr::mglGraph,u::Array,eq::ASCIIString,v::Array,opt::ASCIIString="")
+function fill(gr::mglGraph,u::Array,eq::ASCIIString,v::Array,opt::ASCIIString="")
   uDat = mglData(u)
   vDat = mglData(v)
 
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglData,Ptr{Cchar},Ptr{Void},Ptr{Cchar}), gr, uDat.data,pointer("$eq\0".data), vDat.data, 0,pointer("$opt\0".data))
 end
 
-function Fill(gr::mglGraph,u::Array,eq::ASCIIString,v::Array,w::Array,opt::ASCIIString="")
+function fill(gr::mglGraph,u::Array,eq::ASCIIString,v::Array,w::Array,opt::ASCIIString="")
   uDat = mglData(u)
   vDat = mglData(v)
   wDat = mglData(w)
@@ -2574,25 +2574,25 @@ function Fill(gr::mglGraph,u::Array,eq::ASCIIString,v::Array,w::Array,opt::ASCII
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglData,Ptr{Cchar},Ptr{Void},Ptr{Void},Ptr{Cchar}), gr, uDat.data,pointer("$eq\0".data), vDat.data, wDat.data,pointer("$opt\0".data))
 end
 
-function Fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,opt::ASCIIString="")
+function fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,opt::ASCIIString="")
 
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglDataC,Ptr{Cchar},Ptr{Cchar}), gr,mglData(u).data,pointer("$eq\0".data), 0, 0,pointer("$opt\0".data))
 end
 
-function Fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,v::Array,opt::ASCIIString="")
+function fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,v::Array,opt::ASCIIString="")
   vDat = mglData(v)
 
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglDataC,Ptr{Cchar},Ptr{Void},Ptr{Cchar}), gr,mglData(u).data,pointer("$eq\0".data), vDat.data, 0,pointer("$opt\0".data))
 end
 
-function Fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,v::Array,w::Array,opt::ASCIIString="")
+function fill(gr::mglGraph,u::mglDataC,eq::ASCIIString,v::Array,w::Array,opt::ASCIIString="")
   vDat = mglData(v)
   wDat = mglData(w)
 
     	ccall((:mgl_data_fill_eq,"libmgl2"), Void, (Ptr{Void},mglDataC,Ptr{Cchar},Ptr{Void},Ptr{Void},Ptr{Cchar}), gr,mglData(u).data,pointer("$eq\0".data), vDat.data, wDat.data,pointer("$opt\0".data))
 end
 
-function Title(gr::mglGraph, text::ASCIIString, stl::ASCIIString="", size::mreal=-2.0)
+function title(gr::mglGraph, text::ASCIIString, stl::ASCIIString="", size::mreal=-2.0)
         ccall((:mgl_title, "libmgl2"), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Cdouble), gr, pointer("$text\0".data), pointer("$stl\0".data), size)
 end
 
