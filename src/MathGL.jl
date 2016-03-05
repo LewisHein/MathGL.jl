@@ -1560,7 +1560,7 @@ function Plot(ops::plotOpStack, x::Function, y::Function, xmin::Number, xmax::Nu
 end
 
 function Plot(ops::plotOpStack, x::Function, y::Function, z::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::ASCIIString="", opt::ASCIIString="")
-	pund!(ops, gr->Plot(gr, x, y, z, xmin, xmax, ymin, ymax, zmin, zmax, pen, opt))
+	push!(ops, gr->Plot(gr, x, y, z, xmin, xmax, ymin, ymax, zmin, zmax, pen, opt))
 end
 
 function Plot(gr::mglGraph, y::Function, xmin::Number, xmax::Number, pen::ASCIIString="", opt::ASCIIString="")
