@@ -41,7 +41,7 @@ For further examples and information, refer to the MathGL documentation and exam
 
 ## Installation
 
-This package depends on another of my packages, the Splines library. First install the Splines package, and then this one, using the standard julia method for packages that aren't yet registered.
+This package depends on another of my packages, the Splines library (https://github.com/LewisHein/Splines.jl). First install the Splines package, and then this one, using the standard julia method for packages that aren't yet registered.
 
 ### Installing the MathGL library
 
