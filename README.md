@@ -38,3 +38,18 @@ In julia, the thing.method() syntax is not supported (with good reason); thus th
 ```
 
 For further examples and information, refer to the MathGL documentation and examples. They should all work if translated according to the above rule.
+
+## Installation
+
+This package depends on another of my packages, the Splines library. First install the Splines package, and then this one, using the standard julia method for packages that aren't yet registered.
+
+### Installing the MathGL library
+
+#### Linux:
+MathGL can probably be installed via your favourite Linux distro's repository. These versions may be way out of date; for instance the version for ubuntu is 2 years and several releases behind.
+
+#### Mac OS:
+MathGL is availaible via hombrew
+
+#### Windows:
+There is a binary installer available at http://mathgl.sourceforge.net.
