@@ -1,60 +1,63 @@
-import Base.Multimedia: writemime
+import Base.show
 
 # Methods for mglGraph
-function writemime(io::IO, m::MIME"text/html", gr::mglGraph)
-    name = "MathGL-"*randstring()*".png"
-    WriteFrame(gr, name)
-    writemime(io, m, HTML("<img src='$name'>"))
+function show(io::IO, m::MIME"text/html", gr::mglGraph)
+    htm = """<img id="blah" src="data:image/png;base64,"""
+    htm *= stringmime("image/png", gr)
+    htm *= "\" />\n"
+    show(io, m, HTML(htm))
 end
 
-function writemime(io::IO, m::MIME"text/latex", gr::mglGraph)
+function show(io::IO, m::MIME"text/latex", gr::mglGraph)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(gr, name)
     write(io, "\\includegraphics[width=\\textwidth]{$name}")
 end
 
-function writemime(io::IO, m::MIME"application/x-latex", gr::mglGraph)
+function show(io::IO, m::MIME"application/x-latex", gr::mglGraph)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(gr, name)
-    writemime(io, m, "\\includegraphics[width=\\textwidth]{$name}")
+    show(io, m, "\\includegraphics[width=\\textwidth]{$name}")
 end
 
-function writemime(io::IO, m::MIME"image/png", gr::mglGraph)
+function show(io::IO, m::MIME"image/png", gr::mglGraph)
     name = tempname()"*.png"
     WriteFrame(gr, name)
     file = open(name, "r")
     write(io, readbytes(file))
     close(file)
+    rm(name)
 end
 
 
 # Methods for a plotOpStack
-function writemime(io::IO, m::MIME"text/html", ops::MathGL.plotOpStack)
-    name = "MathGL-"*randstring()*".png"
-    WriteFrame(draw(ops), name)
-    writemime(io, m, HTML("<img src='$name'>"))
+function show(io::IO, m::MIME"text/html", ops::MathGL.plotOpStack)
+    htm = """<img id="blah" src="data:image/png;base64,"""
+    htm *= stringmime("image/png", ops)
+    htm *= "\" />\n"
+    show(io, m, HTML(htm))
 end 
 
 
-function writemime(io::IO, m::MIME"text/latex", ops::MathGL.plotOpStack)
+function show(io::IO, m::MIME"text/latex", ops::MathGL.plotOpStack)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(draw(ops), name)
     write(io, "\\includegraphics[width=\\textwidth]{$name}")
 end 
 
 
-function writemime(io::IO, m::MIME"application/x-latex", ops::MathGL.plotOpStack)
+function show(io::IO, m::MIME"application/x-latex", ops::MathGL.plotOpStack)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(draw(ops), name)
-    writemime(io, m, "\\includegraphics[width=\\textwidth]{$name}")
+    show(io, m, "\\includegraphics[width=\\textwidth]{$name}")
 end 
 
-function writemime(io::IO, m::MIME"image/png", ops::MathGL.plotOpStack)
+function show(io::IO, m::MIME"image/png", ops::MathGL.plotOpStack)
     name = tempname()*".png"
     WriteFrame(draw(ops), name)
     file = open(name, "r")
     write(io, readbytes(file))
     close(file)
+    rm(name)
 end
 
-export writemime
