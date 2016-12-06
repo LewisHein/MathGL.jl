@@ -39,17 +39,71 @@ In julia, the thing.method() syntax is not supported (with good reason); thus th
 
 For further examples and information, refer to the MathGL documentation and examples. They should all work if translated according to the above rule.
 
-## Installation
+There is one noteworthy feature that MathGL doesn't have: the concept of a plot operation stack, or plotOpStack for short.
 
-This package depends on another of my packages, the Splines library (https://github.com/LewisHein/Splines.jl). First install the Splines package, and then this one, using the standard julia method for packages that aren't yet registered.
+Part of the general awesomeness of MathGL for scientific graphics is that it never does anything that it is not explicitly told to.
+This allows for extreme flexibility in how your graphics look, but it also tends to create code that looks like this:
+
+dat = generate_some_data()
+gr = mglGraph()
+SetRange(gr, 'x', size(dat, 1))
+SetRange(gr, 'y', size(dat, 2))
+SetRange(gr, 'z', minimum(dat), maximum(dat))
+Surf(gr, data)
+Axis(gr)
+Box(gr)
+
+rather than like this:
+
+dat = generate_some_data()
+Surf(gr, dat)
+
+This is all very well, not to say entirely appropriate, when you have a program that generates lots of super-customized figures. It provides the ultimate control.
+But it is a very different story at the REPL. To get a pretty picture, you have to type seven commands; If you mis-type number seven, then you have
+to start all over again. But condensing these seven operations into one simple command, e.g. 'Surf', would create the opposite problem. You would
+have to have a ton of different definitions of 'Surf' for however you wanted your graph to look.
+
+The plotOpStack idea brings a new approach to this situation. There are two different methods for Surf: One follows the MathGL API faithfully to enable full
+control by you when you need it. The other returns a set of operations to be performed on an mglGraph, stored in an array along with descriptive names and boolean
+switches to turn them on and off. Thus, you can type:
+
+```{.jl}
+    # (At the beginning of the session, e.g. in the user's julia startup file)
+    import Base.show
+    function show(io::IO, ops::plotOpStack)
+	ShowImage(draw(ops), "YourFavouriteImageViewer"))
+    end
+
+    # At the REPL
+    dat = generate_some_data()
+    ops = Surf(dat) #Note: when the first parameter is not an mglGraph object, the method that returns a plotOpStack is called
+```
+Then the plot will be shown. If you want to change some operation, you can easily disable it by calling disable! with the name of the
+operation (in the names element of the plotOpStack) and/or it's index in the stack.
+Conversely insert!(ops, someDrawingFunction, someIndex) will add someDrawingFunction to the stack at position someIndex.
+
+Thus, you can create graphics that look great by default, but still have total control with a minimum of typing.
+
+
+## Installation
 
 ### Installing the MathGL library
 
+This library is only a wrapper around the MathGL library; Thus, you must have MathGL installed on your system before it will work, and libmgl2.so (or I assume libmgl2.dll for Windows users) must be present in your runtime shared library path.
+
 #### Linux:
-MathGL can probably be installed via your favourite Linux distro's repository. These versions may be way out of date; for instance the version for ubuntu is 2 years and several releases behind.
+MathGL can probably be installed via your favourite Linux distro's repository. These versions may be way out of date; for instance the version for ubuntu is 2 years and several releases behind. I personally recommend downloading and compiling it yourself; it's not hard to do. (Someday, I hope to have this done automatically with BinDeps.)
 
 #### Mac OS:
 MathGL is availaible via hombrew
 
 #### Windows:
 There is a binary installer available at http://mathgl.sourceforge.net.
+
+See the MathGL homepage [mathgl.sourceforge.net] for details.
+
+### Installing the MathGL Julia package
+This is as simple as 
+```{.jl}
+    Pkg.clone("https://github.com/LewisHein/MathGL.jl")
+```
