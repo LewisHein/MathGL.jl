@@ -1,5 +1,4 @@
 module MathGL
-using Splines
 import Base.unsafe_convert
 
 default_width = 600
@@ -136,16 +135,6 @@ end
 typealias HADT mglDataC
 type dual
     dual() = error("dual is not implemented")
-end
-
-function SpaghettiPlot{T}(ops::plotOpStack, dat::Union{Array{Array{T, 1}, 1}, Array{Spline{T}, 1}}, pen::String="", opt::String="")
-	push!(ops, gr->SpaghettiPlot(gr, dat, pen, opt))
-end
-
-function SpaghettiPlot{T}(gr::mglGraph, data::Union{Array{Array{T, 1}, 1}, Array{Spline{T}, 1}}, pen::String="", opt::String="")
-	for i in data
-		Plot(gr, i, pen, opt)
-	end
 end
 
 mglNaN = NaN
@@ -1313,18 +1302,9 @@ function SetLegendMarks(gr::mglGraph, num::Int)
     	ccall((:mgl_set_legend_marks,"libmgl2"), Void, (Ptr{Void},Cint), gr, num)
 end
 
-function Plot(ops::plotOpStack, dat::Union{Array, Spline}, pen::String="", opt::String="")
+function Plot(ops::plotOpStack, dat::Array, pen::String="", opt::String="")
 	push!(ops, gr->Plot(gr, dat, pen, opt))
 end
-
-function Plot(gr::mglGraph, dat::Spline, pen::String="", opt::String="")
-	Plot(gr, uniform_discretize(dat), pen, "xrange $(dat.knots[1]) $(dat.knots[end]); $opt")
-end
-
-function Plot(gr::mglGraph, datx::Spline, daty::Spline, pen::String="", opt::String="")
-	Plot(gr, uniform_discretize(datx), uniform_discretize(daty), pen, opt )#"xrange $(datx.knots[1]) $(datx.knots[end]); yrange $(daty.knots[1]) $(daty.knots[end]); $opt")
-end
-
 
 function Plot(ops::plotOpStack,x::Array,y::Array,z::Array,pen::String="",opt::String="")
 	push!(ops, gr->Plot(gr,x,y,z,pen,opt))
@@ -1349,16 +1329,12 @@ function Plot(gr::mglGraph,x::Array,y::Array,pen::String="",opt::String="")
     	ccall((:mgl_plot_xy,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Plot(y::Union{Array, Spline}, pen::String="", opt::String="")
+function Plot(y::Array, pen::String="", opt::String="")
         opStack=plotOpStack()
         push!(opStack, gr->SetRange(gr, 'y', minimum(y), maximum(y)), "Set y range")
-	if isa(y, Spline)
-		xMin = y.knots[1]
-		xMax = y.knots[end]
-	else
-		xMin = 0
-		xMax = length(y)
-	end
+	xMin = 0
+	xMax = length(y)
+	
 	push!(opStack, gr->SetRange(gr, 'x', xMin, xMax), "Set x range")
         push!(opStack, gr->Box(gr), "Box")
         push!(opStack, gr->Axis(gr), "Axes")
@@ -1367,7 +1343,7 @@ function Plot(y::Union{Array, Spline}, pen::String="", opt::String="")
 end
 
 
-function Plot(x::Union{Array, Spline}, y::Union{Array, Spline}, pen::String="", opt::String="")
+function Plot(x::Array, y::Array, pen::String="", opt::String="")
 	opStack = plotOpStack()
 	push!(opStack, gr->SetRanges(gr, minimum(x), maximum(x), minimum(y), maximum(y)), "Set ranges")
 	push!(opStack, gr->Box(gr), "Box")
@@ -1377,7 +1353,7 @@ function Plot(x::Union{Array, Spline}, y::Union{Array, Spline}, pen::String="", 
 end
 
 
-function Plot(x::Union{Array, Spline}, y::Union{Array, Spline}, z::Union{Array, Spline}, pen::String="", opt::String="")
+function Plot(x::Array, y::Array, z::Array, pen::String="", opt::String="")
 	opStack = plotOpStack()
 	push!(opStack, gr->SetRanges(gr, minimum(x), maximum(x), minimum(y), maximum(y), minimum(z), maximum(z)), "Set ranges")
 	push!(opStack, gr->Box(gr), "Box")
@@ -1589,16 +1565,12 @@ function Area(gr::mglGraph,x::Array,y::Array,z::Array,pen::String="",opt::String
     	ccall((:mgl_area_xyz,"libmgl2"), Void, (Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Void},Ptr{Cchar},Ptr{Cchar}), gr, xDat.data, yDat.data, zDat.data,pointer("$pen\0".data),pointer("$opt\0".data))
 end
 
-function Area(y::Union{Array, Spline}, pen::String="", opt::String="")
+function Area(y::Array, pen::String="", opt::String="")
         opStack=plotOpStack()
         push!(opStack, gr->SetRange(gr, 'y', minimum(y), maximum(y)), "Set y range")
-	if isa(y, Spline)
-		xMin = y.knots[1]
-		xMax = y.knots[end]
-	else
-		xMin = 0
-		xMax = length(y)
-	end
+	xMin = 0
+	xMax = length(y)
+	
 	push!(opStack, gr->SetRange(gr, 'x', xMin, xMax), "Set x range")
         push!(opStack, gr->Box(gr), "Box")
         push!(opStack, gr->Axis(gr), "Axes")
