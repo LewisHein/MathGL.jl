@@ -39,24 +39,28 @@ In julia, the thing.method() syntax is not supported (with good reason); thus th
 
 For further examples and information, refer to the MathGL documentation and examples. They should all work if translated according to the above rule.
 
+### How the plotOpStack makes your life easier
+
 There is one noteworthy feature that MathGL doesn't have: the concept of a plot operation stack, or plotOpStack for short.
 
 Part of the general awesomeness of MathGL for scientific graphics is that it never does anything that it is not explicitly told to.
 This allows for extreme flexibility in how your graphics look, but it also tends to create code that looks like this:
-
-dat = generate_some_data()
-gr = mglGraph()
-SetRange(gr, 'x', size(dat, 1))
-SetRange(gr, 'y', size(dat, 2))
-SetRange(gr, 'z', minimum(dat), maximum(dat))
-Surf(gr, data)
-Axis(gr)
-Box(gr)
+```{.jl}
+    dat = generate_some_data()
+    gr = mglGraph()
+    SetRange(gr, 'x', size(dat, 1))
+    SetRange(gr, 'y', size(dat, 2))
+    SetRange(gr, 'z', minimum(dat), maximum(dat))
+    Surf(gr, data)
+    Axis(gr)
+    Box(gr)
+```
 
 rather than like this:
-
-dat = generate_some_data()
-Surf(gr, dat)
+```{.jl}
+    dat = generate_some_data()
+    Surf(gr, dat)
+```
 
 This is all very well, not to say entirely appropriate, when you have a program that generates lots of super-customized figures. It provides the ultimate control.
 But it is a very different story at the REPL. To get a pretty picture, you have to type seven commands; If you mis-type number seven, then you have
