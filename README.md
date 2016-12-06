@@ -25,6 +25,7 @@ MathGL also brings several key paradigms to its job that enable absolute control
 
 This package provides a wrapper around an existing MathGL installation and adds new features such as the plotOpStack that allows the user to build an array of drawing functions, name them, turn them on and off at will, and draw the result to a pretty picture. See the comments in MathGL.jl for more information on this.
 
+## Documenntation
 MathGL already has great documentation; this package faithfully follows the MathGL C++ API, with one exeption to make it more Julia-esque: In MathGL, each function is a method on an mglGraph object, so that you might write C++ code like
 ```{.cpp}
     gr = mglGraph()
