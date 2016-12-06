@@ -1302,10 +1302,6 @@ function SetLegendMarks(gr::mglGraph, num::Int)
     	ccall((:mgl_set_legend_marks,"libmgl2"), Void, (Ptr{Void},Cint), gr, num)
 end
 
-function Plot(ops::plotOpStack, dat::Array, pen::String="", opt::String="")
-	push!(ops, gr->Plot(gr, dat, pen, opt))
-end
-
 function Plot(ops::plotOpStack,x::Array,y::Array,z::Array,pen::String="",opt::String="")
 	push!(ops, gr->Plot(gr,x,y,z,pen,opt))
 end
