@@ -37,7 +37,7 @@ mutable struct mglGraph
         graph=ccall((:mgl_create_graph, mgllib_name), Ptr{Nothing}, (Int64, Int64), width, height)
 	gr = new(width, height, graph)
 	finalizer(freeMglGraph, gr)
-        return gr 
+        return gr
     end
 
     mglGraph() = mglGraph(default_width, default_height)
@@ -149,7 +149,7 @@ function Stop(ops::plotOpStack, stop::Bool=true)
 end
 
 function SetWarn(gr::mglGraph, code::Int, info_::String)
-	
+
 	ccall((:mgl_set_warn,mgllib_name), Nothing, (Ptr{Nothing},Cint,Cstring), gr, code, info_)
 end
 
@@ -159,7 +159,7 @@ function Message(gr::mglGraph)
 end
 
 function GetWarn(gr::mglGraph)
-	
+
 	ccall((:mgl_get_warn,mgllib_name), Cint, (Ptr{Nothing},), gr)
 end
 
@@ -1184,7 +1184,7 @@ end
 
 function Puts(gr::mglGraph, x::Number, y::Number, text::String,font::String=":AC",size::Number=-1.0)
 	#test_ascii(font)
-	
+
 	#ccall((:mgl_putsw,mgllib_name), Nothing, (Ptr{Nothing},Cdouble,Cdouble,Cdouble,Ptr{Cwchar_t},Ptr{Cchar},Cdouble), gr, x, y, 0.0, pointer("$text\0"), pointer("$font\0"), size)
 	Puts(gr, (x, y, 0.0), (x+1, y, 0.0), text, font,  size)
 end
@@ -1380,7 +1380,7 @@ function Plot(y::Array, pen::String="", opt::String="")
         push!(opStack, gr->SetRange(gr, 'y', minimum(y), maximum(y)), "Set y range")
 	xMin = 0
 	xMax = length(y)
-	
+
 	push!(opStack, gr->SetRange(gr, 'x', xMin, xMax), "Set x range")
         push!(opStack, gr->Box(gr), "Box")
         push!(opStack, gr->Axis(gr), "Axes")
@@ -1410,7 +1410,7 @@ end
 
 
 function func2array(y::Function, xmin::Number, xmax::Number)
-	ydisc = Array{Float64, 1}(1000)
+	ydisc = Array{Float64, 1}(undef,1000)
 	for (i, x) in enumerate(xmin:((xmax-xmin)/999):xmax)
 		ydisc[i] = y(x)
 	end
@@ -1502,7 +1502,7 @@ function SpaghettiPlot(gr::mglGraph,spag::AbstractVector{Vector{T}},pen::String=
 	    skip1 = false
 	    continue
 	end
-	
+
 	Plot(gr, strand, pen, opt)
     end
 end
@@ -1640,7 +1640,7 @@ function Area(y::Array, pen::String="", opt::String="")
         push!(opStack, gr->SetRange(gr, 'y', minimum(y), maximum(y)), "Set y range")
 	xMin = 0
 	xMax = length(y)
-	
+
 	push!(opStack, gr->SetRange(gr, 'x', xMin, xMax), "Set x range")
         push!(opStack, gr->Box(gr), "Box")
         push!(opStack, gr->Axis(gr), "Axes")
@@ -1786,7 +1786,7 @@ function Bars(y::Array,pen::String="",opt::String="")
 	Bars(ops, y, pen, opt)
 	Axis(ops)
 	MathGL.Box(ops)
-	
+
 	return ops
 end
 
