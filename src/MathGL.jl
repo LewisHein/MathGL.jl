@@ -26,7 +26,7 @@ end
 
 
 """A wrapper type around MathGL's mglGraph type"""
-struct mglGraph
+mutable struct mglGraph
     width::Int
     height::Int
     graph::Ptr{Nothing}
@@ -36,7 +36,7 @@ struct mglGraph
         height = height
         graph=ccall((:mgl_create_graph, mgllib_name), Ptr{Nothing}, (Int64, Int64), width, height)
 	gr = new(width, height, graph)
-	finalizer(gr, freeMglGraph)
+	finalizer(freeMglGraph, gr)
         return gr 
     end
 
@@ -54,7 +54,7 @@ unsafe_convert(::Type{Ptr{Nothing}}, gr::mglGraph) = gr.graph
 
 const mreal = Cdouble
 """A wrapper around the MathGL mglData type"""
-struct mglData
+mutable struct mglData
     nx::Int
     ny::Int
     nz::Int
@@ -66,7 +66,7 @@ struct mglData
         nz = nz
         dataPtr = dataPointer(ccall((:mgl_create_data_size, mgllib_name), Ptr{Nothing}, (Int, Int, Int), nx, ny, nz))
         data = new(nx, ny, nz, dataPtr)
-	finalizer(data, freeMglData)
+	finalizer(freeMglData, data)
 	return data
     end
 
