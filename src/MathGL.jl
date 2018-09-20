@@ -96,7 +96,7 @@ mutable struct mglData
         end
 
         dat = new(nx, ny, nz, data)
-	finalizer(dat, freeMglData)
+	finalizer(freeMglData, dat)
 	return dat
     end
 
