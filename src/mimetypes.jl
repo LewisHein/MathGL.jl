@@ -1,4 +1,5 @@
 import Base.show
+import Base64.stringmime
 
 # Methods for mglGraph
 function show(io::IO, m::MIME"text/html", gr::mglGraph)
@@ -36,21 +37,21 @@ function show(io::IO, m::MIME"text/html", ops::MathGL.plotOpStack)
     htm *= stringmime("image/png", ops)
     htm *= "\" />\n"
     show(io, m, HTML(htm))
-end 
+end
 
 
 function show(io::IO, m::MIME"text/latex", ops::MathGL.plotOpStack)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(draw(ops), name)
     write(io, "\\includegraphics[width=\\textwidth]{$name}")
-end 
+end
 
 
 function show(io::IO, m::MIME"application/x-latex", ops::MathGL.plotOpStack)
     name = "MathGL-"*randstring()*".png"
     WriteFrame(draw(ops), name)
     show(io, m, "\\includegraphics[width=\\textwidth]{$name}")
-end 
+end
 
 function show(io::IO, m::MIME"image/png", ops::MathGL.plotOpStack)
     name = tempname()*".png"
@@ -60,4 +61,3 @@ function show(io::IO, m::MIME"image/png", ops::MathGL.plotOpStack)
     close(file)
     rm(name)
 end
-
