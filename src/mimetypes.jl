@@ -57,7 +57,7 @@ function show(io::IO, m::MIME"image/png", ops::MathGL.plotOpStack)
     name = tempname()*".png"
     WriteFrame(draw(ops), name)
     file = open(name, "r")
-    write(io, readbytes(file))
+    write(io, read(file))
     close(file)
     rm(name)
 end
