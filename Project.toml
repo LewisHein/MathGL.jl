@@ -1,0 +1,6 @@
+authors = ["lewis "]
+name = "MathGL"
+uuid = "fe150538-bc60-11e8-3a63-23c4bb4060aa"
+version = "0.1.0"
+
+[deps]

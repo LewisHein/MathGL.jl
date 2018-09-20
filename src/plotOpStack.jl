@@ -40,7 +40,7 @@ ops = Surf(dat) #Note: when the first parameter is not an mglGraph object, the m
 Then the plot will be shown. If the user wishes to change some operation, he/she can easily disable things by setting elements of ops.switches to false
 or call insert!(ops, someDrawingFunction, someIndex) too add the operation someDrawingFunction to the stack at position someIndex
 """
-type plotOpStack
+struct plotOpStack
     ops::Array{Function, 1}
     names::Array{String, 1}
     switches::Array{Bool, 1}

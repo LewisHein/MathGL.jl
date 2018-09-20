@@ -21,7 +21,7 @@ function show(io::IO, m::MIME"application/x-latex", gr::mglGraph)
 end
 
 function show(io::IO, m::MIME"image/png", gr::mglGraph)
-    name = tempname()"*.png"
+    name = tempname()*".png"
     WriteFrame(gr, name)
     file = open(name, "r")
     write(io, readbytes(file))
