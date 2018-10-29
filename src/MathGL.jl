@@ -1,4 +1,4 @@
-module MathGL
+ωmodule MathGL
 import Base.unsafe_convert
 
 const MGL_NO_ORIGIN = 0x100000
@@ -1409,7 +1409,10 @@ function Plot(x::Array, y::Array, z::Array, pen::String="", opt::String="")
 end
 
 
-function func2array(y::Function, xmin::Number, xmax::Number)
+function func2array(y::Any, xmin::Number, xmax::Number)
+	if length(methods(y, (Float64,))) == 0
+	    error(ArgumentError("To plot this object, it must be callable with a Float64 argument"))
+	end
 	ydisc = Array{Float64, 1}(undef,1000)
 	for (i, x) in enumerate(xmin:((xmax-xmin)/999):xmax)
 		ydisc[i] = y(x)
@@ -1428,7 +1431,7 @@ function Plot(y::Function, xmin::Number, xmax::Number, pen::String="", opt::Stri
 	return opStack
 end
 
-function Plot(x::Function, y::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
+function Plot(x::Any, y::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
 	opStack = plotOpStack()
 	ydisc = func2array(y, ymin, ymax)
 	xdisc = func2array(x, xmin, xmax)
@@ -1439,7 +1442,7 @@ function Plot(x::Function, y::Function, xmin::Number, xmax::Number, ymin::Number
 	return opStack
 end
 
-function Plot(x::Function, y::Function, z::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
+function Plot(x::Any, y::Any, z::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
 	opStack = plotOpStack()
 	ydisc = func2array(y, ymin, ymax)
 	xdisc = func2array(x, xmin, xmax)
@@ -1452,27 +1455,27 @@ function Plot(x::Function, y::Function, z::Function, xmin::Number, xmax::Number,
 end
 
 
-function Plot(ops::plotOpStack, y::Function, xmin::Number, xmax::Number, pen::String="", opt::String="")
+function Plot(ops::plotOpStack, y::Any, xmin::Number, xmax::Number, pen::String="", opt::String="")
 	push!(ops, gr->Plot(gr, y, xmin, xmax, pen, opt))
 end
 
-function Plot(ops::plotOpStack, x::Function, y::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
+function Plot(ops::plotOpStack, x::Any, y::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
 	push!(ops, gr->Plot(gr, x, y, xmin, xmax, ymin, ymax, pen, opt))
 end
 
-function Plot(ops::plotOpStack, x::Function, y::Function, z::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
+function Plot(ops::plotOpStack, x::Any, y::Any, z::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
 	push!(ops, gr->Plot(gr, x, y, z, xmin, xmax, ymin, ymax, zmin, zmax, pen, opt))
 end
 
-function Plot(gr::mglGraph, y::Function, xmin::Number, xmax::Number, pen::String="", opt::String="")
+function Plot(gr::mglGraph, y::Any, xmin::Number, xmax::Number, pen::String="", opt::String="")
 	Plot(gr, func2array(y, xmin, xmax), pen, "xrange $xmin $xmax; $opt")
 end
 
-function Plot(gr::mglGraph, x::Function, y::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
+function Plot(gr::mglGraph, x::Any, y::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, pen::String="", opt::String="")
 	Plot(gr, func2array(x, xmin, xmax), func2array(y, ymin, ymax), pen, "xrange $xmin $xmax; yrange $ymin $ymax; $opt")
 end
 
-function Plot(gr::mglGraph, x::Function, y::Function, z::Function, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
+function Plot(gr::mglGraph, x::Any, y::Any, z::Any, xmin::Number, xmax::Number, ymin::Number, ymax::Number, zmin::Number, zmax::Number, pen::String="", opt::String="")
 	Plot(gr, func2array(x, xmin, xmax), func2array(y, ymin, ymax), func2array(z, zmin, zmax), pen, "xrange $xmin $xmax; yrange $ymin $ymax; $opt")
 end
 
