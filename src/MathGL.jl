@@ -1,4 +1,4 @@
-ωmodule MathGL
+module MathGL
 import Base.unsafe_convert
 
 const MGL_NO_ORIGIN = 0x100000
